@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cougar Parfum</title>
+<meta name="description" content="Cougar Parfum — Extrait de Parfum 30–40%. Coleção numerada, inspirada nos grandes clássicos, em tiragem limitada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* COUGAR PARFUM — vitrine numerada, estética clara/editorial. Preto e dourado em detalhes. */
+:root{
+  color-scheme: light;
+  --paper:#ffffff; --cream:#f5f1e9; --ink:#17150f; --soft:#6d685d; --faint:#a7a093;
+  --line:#e9e4da; --gold:#9a7b33; --gold-deep:#7c6124; --red:#a5332b; --black:#121110;
+  --serif:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans:'Jost', system-ui, -apple-system, Segoe UI, sans-serif; --wrap:1240px;
+}
+*{box-sizing:border-box} html,body{margin:0}
+body{background:var(--paper); color:var(--ink); font-family:var(--sans); font-weight:300; font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased}
+img{max-width:100%; display:block} a{color:inherit; text-decoration:none}
+button{font-family:inherit; cursor:pointer}
+h1,h2,h3{margin:0; font-weight:500; text-wrap:balance}
+.wrap{max-width:var(--wrap); margin:0 auto; padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--gold-deep); font-weight:500}
+
+.util{background:var(--ink); color:#efe9dc; text-align:center; font-size:10px; letter-spacing:.24em; text-transform:uppercase; padding:9px 16px}
+.util b{color:#e4c982; font-weight:500}
+
+header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background:rgba(255,255,255,.93); backdrop-filter:saturate(1.1) blur(8px); border-bottom:1px solid var(--line)}
+.nav{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:16px; padding:18px clamp(16px,4vw,40px)}
+.nav .links{display:flex; gap:26px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--soft)}
+.nav .links a:hover{color:var(--ink)} .nav .right{justify-self:end}
+.brand{justify-self:center; text-align:center; line-height:1}
+.brand .name{font-family:var(--serif); font-weight:500; font-size:clamp(18px,2.4vw,23px); letter-spacing:.34em; text-transform:uppercase; padding-left:.34em}
+.brand .sub{font-size:8.5px; letter-spacing:.42em; text-transform:uppercase; color:var(--gold-deep); margin-top:5px; padding-left:.42em}
+.bag{display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; background:none; border:0; padding:0}
+.bag .ct{min-width:19px; height:19px; padding:0 5px; border-radius:999px; background:var(--ink); color:#fff; font-size:10px; display:inline-flex; align-items:center; justify-content:center}
+.menu-links{display:none}
+
+.hero{padding:0}
+.btn{display:inline-block; font-size:11px; letter-spacing:.2em; text-transform:uppercase; padding:15px 30px; background:var(--ink); color:var(--paper); border:1px solid var(--ink); transition:.22s}
+.btn:hover{background:transparent; color:var(--ink)}
+.btn-text{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); border-bottom:1px solid var(--gold); padding-bottom:3px}
+.herotrio{position:relative; height:clamp(380px,54vh,600px); overflow:hidden; background:var(--ink)}
+.herotrio>img{width:100%; height:100%; object-fit:cover; object-position:center; display:block}
+.heroverlay{position:absolute; inset:0; display:flex; align-items:flex-end; background:linear-gradient(to top, rgba(8,6,4,.88) 0%, rgba(8,6,4,.46) 40%, rgba(8,6,4,.08) 66%, rgba(8,6,4,.30) 100%), linear-gradient(to right, rgba(8,6,4,.58), rgba(8,6,4,0) 58%)}
+.heroverlay .wrap{width:100%; padding-bottom:clamp(30px,5vw,58px)}
+.heroverlay .eyebrow{color:#e8cf93}
+.heroverlay h1{font-family:var(--serif); font-weight:500; font-size:clamp(44px,7vw,86px); line-height:1.02; letter-spacing:-.01em; color:#fff; margin:16px 0 0; text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.heroverlay h1 em{font-style:italic; color:#e8cf93}
+.heroverlay .lead{color:#f0e8d9; max-width:44ch; margin:18px 0 0; font-size:16px; line-height:1.6; text-shadow:0 1px 14px rgba(0,0,0,.55)}
+.heroverlay .cta{display:flex; gap:16px; align-items:center; margin-top:26px; flex-wrap:wrap}
+.hero-btn{background:var(--paper); color:var(--ink); border-color:var(--paper)}
+.hero-btn:hover{background:transparent; color:#fff; border-color:#fff}
+.btn-text.light{color:#e8cf93; border-color:#b9975a}
+.btn-text.light:hover{color:#fff; border-color:#fff}
+.herocopy{background:var(--black); color:#f0e8d9; text-align:center; padding-block:clamp(40px,6vw,68px)}
+.herocopy .eyebrow{color:#e8cf93}
+.herocopy h1{font-family:var(--serif); font-weight:500; font-size:clamp(40px,6vw,76px); line-height:1.03; color:#fff; margin:14px 0 0}
+.herocopy h1 em{font-style:italic; color:#e8cf93}
+.herocopy .lead{color:#cfc8ba; max-width:46ch; margin:16px auto 0; font-size:16px; line-height:1.6}
+.herocopy .cta{display:flex; gap:16px; justify-content:center; align-items:center; margin-top:26px; flex-wrap:wrap}
+@media (max-width:640px){
+  .herotrio{height:72vh; min-height:440px}
+}
+
+.collection{padding-block:clamp(40px,6vw,72px); border-top:1px solid var(--line)}
+.sec-head{text-align:center; max-width:60ch; margin:0 auto 38px}
+.sec-head h2{font-family:var(--serif); font-size:clamp(30px,4.4vw,50px); margin:12px 0 0}
+.sec-head p{color:var(--soft); margin:16px auto 0; max-width:54ch}
+
+.filters{display:flex; justify-content:center; flex-wrap:wrap; gap:8px 28px; margin:-6px 0 36px}
+.filters button{background:none; border:0; padding:6px 0; color:var(--soft); font-size:11px; letter-spacing:.18em; text-transform:uppercase; border-bottom:1px solid transparent; transition:.2s}
+.filters button:hover{color:var(--ink)}
+.filters button[aria-pressed="true"]{color:var(--ink); border-color:var(--gold)}
+.grid-prod{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(26px,3vw,44px) clamp(20px,2.4vw,32px)}
+.card{display:flex; flex-direction:column}
+.card .pic{position:relative; aspect-ratio:4/5; background:var(--cream); overflow:hidden; border:0; padding:0; width:100%; cursor:zoom-in; display:block}
+.card .pic img{width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.2,.6,.2,1)}
+.card .pic:hover img{transform:scale(1.04)}
+.card .pic .zoom{position:absolute; bottom:12px; right:12px; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); background:rgba(255,255,255,.9); padding:5px 9px; opacity:0; transition:.2s}
+.card .pic:hover .zoom{opacity:1}
+.card .body{padding:16px 2px 0; display:flex; flex-direction:column; flex:1}
+.card .top{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
+.card .num{font-family:var(--serif); font-size:23px; font-weight:500; letter-spacing:.02em}
+.card .stk{font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint)}
+.card .stk.pre{color:var(--gold-deep)} .card .stk.low{color:var(--red)}
+.card .fam{font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-top:6px}
+.card .insp{font-size:12px; color:var(--soft); margin-top:7px}
+.card .insp b{color:var(--ink); font-weight:500}
+.card .price{display:flex; flex-direction:column; align-items:flex-start; gap:3px; margin-top:12px; font-variant-numeric:tabular-nums}
+.anchor{display:flex; align-items:baseline; gap:6px}
+.alabel{font-size:8.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); font-weight:600}
+.grouphd{grid-column:1/-1; font-family:var(--serif); font-size:clamp(20px,3.2vw,27px); color:var(--ink); font-weight:600; margin:26px 0 4px; padding-bottom:9px; border-bottom:1px solid var(--line)}
+.card .price .orig{font-size:12.5px; color:var(--red); text-decoration:line-through; text-decoration-color:var(--red)}
+.card .price .now{font-size:17px; color:var(--gold-deep)}
+.card .price .now small{font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-left:3px}
+.add{margin-top:14px; width:100%; background:transparent; border:1px solid var(--ink); color:var(--ink); padding:12px; font-size:10px; letter-spacing:.22em; text-transform:uppercase; transition:.22s}
+.add:hover{background:var(--ink); color:var(--paper)}
+.add.pre{border-color:var(--gold-deep); color:var(--gold-deep)} .add.pre:hover{background:var(--gold-deep); color:#fff}
+
+/* lightbox */
+.lb{position:fixed; inset:0; background:rgba(16,14,10,.93); display:none; align-items:center; justify-content:center; z-index:100; padding:20px}
+.lb.show{display:flex}
+.lb img{max-width:min(600px,96vw); max-height:92vh; object-fit:contain; box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.lbx{position:absolute; top:16px; right:22px; font-size:30px; line-height:1; color:#fff; background:none; border:0; z-index:2}
+.lbnav{position:absolute; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.35); color:#fff; font-size:28px; line-height:1; display:flex; align-items:center; justify-content:center; transition:.2s; z-index:2}
+.lbnav:hover{background:rgba(255,255,255,.26)}
+.lbprev{left:20px} .lbnext{right:20px}
+@media(max-width:560px){ .lbnav{width:42px; height:42px; font-size:23px} .lbprev{left:10px} .lbnext{right:10px} }
+
+.casa{margin-top:clamp(52px,8vw,100px); background:var(--cream); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.casa .wrap{padding-block:clamp(52px,8vw,104px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,88px); align-items:center}
+.casa h2{font-family:var(--serif); font-size:clamp(28px,3.8vw,44px); margin:16px 0 0; line-height:1.1}
+.casa p{color:var(--soft); margin:20px 0 0; max-width:46ch}
+.casa .quote{font-family:var(--serif); font-style:italic; font-size:21px; color:var(--ink); line-height:1.5; margin-top:24px}
+.spec{list-style:none; margin:0; padding:0}
+.spec li{display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:18px 0; border-top:1px solid var(--line)}
+.spec li:last-child{border-bottom:1px solid var(--line)}
+.spec .k{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--soft)}
+.spec .v{font-family:var(--serif); font-size:22px} .spec .v b{color:var(--gold-deep); font-weight:500}
+.signoff{margin-top:30px; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint)}
+
+footer{background:var(--black); color:#cfc8ba; padding-block:clamp(50px,7vw,82px)}
+footer .wrap{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px}
+footer .flogo{height:46px; width:auto; opacity:.95; margin-bottom:18px}
+footer .tag{font-family:var(--serif); font-style:italic; font-size:18px; color:#e9e1cf; max-width:30ch; line-height:1.5}
+footer h4{font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:#8f8775; font-weight:500; margin:0 0 16px}
+footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px; font-size:13px}
+footer a:hover{color:#fff}
+footer .legal{grid-column:1/-1; border-top:1px solid #2a2824; margin-top:26px; padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:#6f6858}
+footer .legal .gold{color:#c9a24b}
+
+.scrim{position:fixed; inset:0; background:rgba(20,18,14,.44); opacity:0; pointer-events:none; transition:.3s; z-index:60}
+.scrim.show{opacity:1; pointer-events:auto}
+.drawer{position:fixed; top:0; right:0; height:100%; width:min(420px,92vw); background:var(--paper); transform:translateX(100%); transition:transform .34s cubic-bezier(.2,.7,.2,1); z-index:70; display:flex; flex-direction:column; box-shadow:-20px 0 60px rgba(0,0,0,.12)}
+.drawer.show{transform:none}
+.drawer .dh{display:flex; justify-content:space-between; align-items:center; padding:22px 24px; border-bottom:1px solid var(--line)}
+.drawer .dh h3{font-family:var(--serif); font-size:22px}
+.x{background:none; border:0; font-size:22px; color:var(--soft); line-height:1}
+.ditems{flex:1; overflow:auto; padding:8px 24px}
+.ditem{display:grid; grid-template-columns:54px 1fr auto; gap:14px; padding:18px 0; border-bottom:1px solid var(--line); align-items:center}
+.ditem img{width:54px; height:68px; object-fit:cover; background:var(--cream)}
+.ditem .nm{font-family:var(--serif); font-size:18px}
+.ditem .mt{font-size:11px; color:var(--faint); letter-spacing:.1em; text-transform:uppercase; margin-top:3px}
+.qty{display:inline-flex; align-items:center; gap:12px; margin-top:9px}
+.qty button{width:24px; height:24px; border:1px solid var(--line); background:none; font-size:14px; line-height:1}
+.ditem .pr{text-align:right; font-variant-numeric:tabular-nums; color:var(--gold-deep)}
+.ditem .rm{display:block; margin-top:8px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); background:none; border:0}
+.ditem .rm:hover{color:var(--red)}
+.dfoot{padding:20px 24px calc(20px + env(safe-area-inset-bottom,0px)); border-top:1px solid var(--line)}
+.dfoot .sub{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px}
+.dfoot .sub .s-l{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--soft)}
+.dfoot .sub .s-v{font-family:var(--serif); font-size:26px; font-variant-numeric:tabular-nums}
+.dfoot .note{font-size:11px; color:var(--faint); margin:0 0 16px}
+.dfoot .btn{width:100%; text-align:center; border:0}
+.empty{padding:60px 24px; text-align:center; color:var(--faint)}
+.empty .serif{font-family:var(--serif); font-size:22px; color:var(--soft); display:block; margin-bottom:8px}
+
+.modal{position:fixed; inset:0; z-index:80; display:none; align-items:center; justify-content:center; padding:20px}
+.modal.show{display:flex}
+.modal .card2{background:var(--paper); max-width:460px; width:100%; padding:34px clamp(22px,4vw,38px); max-height:90vh; overflow:auto; box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.modal h3{font-family:var(--serif); font-size:28px; margin-bottom:6px}
+.modal .sumrow{display:flex; justify-content:space-between; gap:12px; padding:11px 0; border-bottom:1px solid var(--line); font-size:14px}
+.modal .tot{display:flex; justify-content:space-between; padding:16px 0 4px; font-family:var(--serif); font-size:22px}
+.modal .wpp{display:block; width:100%; text-align:center; margin-top:14px; padding:15px 30px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; background:var(--gold-deep); color:#fff; border:1px solid var(--gold-deep); transition:.22s}
+.modal .wpp:hover{background:transparent; color:var(--gold-deep)}
+.modal .wpp.alt{background:transparent; color:var(--gold-deep)} .modal .wpp.alt:hover{background:var(--gold-deep); color:#fff}
+.modal .mnote{font-size:12px; color:var(--soft); margin-top:16px; line-height:1.6}
+
+#toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px); opacity:0; background:var(--ink); color:#f3eee3; padding:13px 22px; font-size:12px; letter-spacing:.08em; z-index:110; transition:.3s; pointer-events:none; max-width:90vw; text-align:center}
+#toast.show{opacity:1; transform:translateX(-50%)} #toast b{color:#e4c982; font-weight:500}
+
+@media (max-width:900px){
+  .grid-prod{grid-template-columns:repeat(2,1fr)}
+  .hero .grid{grid-template-columns:1fr; gap:36px} .hero .shot{max-width:440px; order:-1}
+  .casa .wrap{grid-template-columns:1fr; gap:34px} footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .nav{grid-template-columns:auto 1fr auto} .nav .links{display:none} .nav .right .word{display:none}
+  .menu-links{display:flex; gap:20px; justify-content:center; flex-wrap:wrap; padding:12px 16px; border-top:1px solid var(--line); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--soft)}
+  .grid-prod{grid-template-columns:repeat(2,1fr); gap:22px 14px} footer .wrap{grid-template-columns:1fr}
+  .card .num{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<div class="util">Extrait de Parfum · 30–40% de concentração de essência &nbsp;·&nbsp; <b>Pré-venda aberta</b> &nbsp;·&nbsp; Tiragem limitada</div>
+
+<header>
+  <nav class="nav">
+    <div class="links"><a href="#colecao">A Coleção</a><a href="#casa">A Casa</a><a href="#contato">Contato</a></div>
+    <a href="#top" class="brand" aria-label="Cougar Parfum"><div class="name">Cougar Parfum</div><div class="sub">Extrait de Parfum</div></a>
+    <div class="right"><button class="bag" id="bagBtn"><span class="word">Sacola</span> <span class="ct" id="bagCt">0</span></button></div>
+  </nav>
+  <div class="menu-links"><a href="#colecao">Coleção</a><a href="#casa">A Casa</a><a href="#contato">Contato</a></div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="herotrio">
+    <img src="img/711e348624.jpg" alt="Cougar Parfum — coleção numerada">
+  </div>
+  <div class="herocopy"><div class="wrap">
+    <div class="eyebrow">Alta concentração · Tiragem limitada</div>
+    <h1>Deixe seu <em>rastro</em>.</h1>
+    <p class="lead">Fragrâncias feitas para que você seja lembrado. Extrait de Parfum 30–40%.</p>
+    <div class="cta"><a href="#colecao" class="btn hero-btn">Ver a coleção</a><a href="#casa" class="btn-text light">Conheça a casa</a></div>
+  </div></div>
+</section>
+
+<section class="collection" id="colecao"><div class="wrap">
+  <div class="sec-head">
+    <div class="eyebrow">A Coleção</div>
+    <h2>Cada fragrância, um número</h2>
+    <p>Do Nº 01 ao Nº 52 — clique em qualquer frasco para ver a pirâmide olfativa completa. O preço de um original equivalente aparece riscado; o seu, ao lado.</p>
+  </div>
+  <div class="filters" id="filters">
+    <button data-f="todos" aria-pressed="true">Todos</button>
+    <button data-f="Masculino" aria-pressed="false">Masculino</button>
+    <button data-f="Feminino" aria-pressed="false">Feminino</button>
+    <button data-f="Unissex" aria-pressed="false">Unissex</button>
+    <button data-f="nicho" aria-pressed="false">Perfumes de Nicho</button>
+    <button data-f="maceracao" aria-pressed="false">Em Maceração</button>
+  </div>
+  <div class="grid-prod" id="grid"></div>
+</div></section>
+
+<section class="casa" id="casa"><div class="wrap">
+  <div>
+    <div class="eyebrow">A Casa</div>
+    <h2>Mais que perfume,<br>uma presença.</h2>
+    <p class="quote">"Alguns perfumes são feitos para serem sentidos. Outros, para serem lembrados."</p>
+    <p>A Cougar Parfum nasce de uma obsessão: concentração. Enquanto um eau de parfum comum trabalha entre 15% e 20% de essência, cada frasco Cougar carrega de 30% a 40% — fixação prolongada, projeção intensa e um rastro que permanece. Produção em pequenos lotes.</p>
+    <div class="signoff">Idealizada por Marcelo · Grupo M8</div>
+  </div>
+  <ul class="spec">
+    <li><span class="k">Concentração</span><span class="v"><b>30–40%</b> de essência</span></li>
+    <li><span class="k">Fixação</span><span class="v">Prolongada</span></li>
+    <li><span class="k">Projeção</span><span class="v">Intensa</span></li>
+    <li><span class="k">Volume</span><span class="v">50 ml</span></li>
+    <li><span class="k">Produção</span><span class="v">Tiragem limitada</span></li>
+  </ul>
+</div></section>
+
+<footer id="contato"><div class="wrap">
+  <div><img class="flogo" src="img/423f859e06.png" alt="Cougar Parfum"><div class="tag">Deixe seu rastro.</div></div>
+  <div><h4>Navegar</h4><ul><li><a href="#colecao">A Coleção</a></li><li><a href="#casa">A Casa</a></li><li><a href="#top">Início</a></li></ul></div>
+  <div><h4>Contato</h4><ul><li><a id="igLink" href="https://www.instagram.com/cougarparfum/" target="_blank" rel="noopener">Instagram · @cougarparfum</a></li></ul></div>
+  <div class="legal"><span>© 2026 Cougar Parfum · <span class="gold">Grupo M8 Brasil</span></span><span>Florianópolis · Santa Catarina</span></div>
+</div></footer>
+
+<div class="lb" id="lb"><button class="lbx" id="lbx" aria-label="Fechar">×</button><button class="lbnav lbprev" id="lbprev" aria-label="Anterior">‹</button><img id="lbimg" src="" alt=""><button class="lbnav lbnext" id="lbnext" aria-label="Próximo">›</button></div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Sacola">
+  <div class="dh"><h3>Sua sacola</h3><button class="x" id="closeCart" aria-label="Fechar">×</button></div>
+  <div class="ditems" id="ditems"></div>
+  <div class="dfoot">
+    <div class="sub"><span class="s-l">Subtotal</span><span class="s-v" id="sub">R$ 0</span></div>
+    <p class="note">Frete e pré-venda combinados no fechamento.</p>
+    <button class="btn" id="checkout">Finalizar reserva</button>
+  </div>
+</aside>
+
+<div class="modal" id="modal"><div class="card2">
+  <h3>Finalizar reserva</h3>
+  <p style="font-size:13px;color:var(--soft);margin:0 0 18px">Confira os itens e toque em <b>Enviar pelo WhatsApp</b> — seu pedido vai pré-preenchido e a gente combina pagamento e entrega.</p>
+  <div id="sumlist"></div>
+  <div class="tot"><span>Total</span><span id="modtot">R$ 0</span></div>
+  <a class="wpp" id="waCheckout" href="https://wa.me/5548992166905" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
+  <button class="wpp alt" id="copyOrder">Copiar pedido</button>
+  <p class="mnote">Vai abrir o WhatsApp com seu pedido já escrito — é só tocar em enviar. 💬</p>
+</div></div>
+
+<div id="toast"></div>
+
+<script>
+const POSTERS={"1":"img/9677da0b10.jpg","2":"img/e0dba80a51.jpg","3":"img/5b68026958.jpg","4":"img/27b9776acf.jpg","5":"img/95855adb75.jpg","6":"img/f3e741d732.jpg","7":"img/ba7b2736c9.jpg","8":"img/8622c13e4b.jpg","9":"img/83d1364bf7.jpg","10":"img/2dcb209c0c.jpg","11":"img/6e7d8987dc.jpg","12":"img/554efeccd0.jpg","13":"img/2b1b611eda.jpg","14":"img/87f12bf9ea.jpg","15":"img/e9ec600b29.jpg","16":"img/d31340fedd.jpg","17":"img/57de0c6ef1.jpg","18":"img/a60df94bdb.jpg","19":"img/a7a68e3a10.jpg","20":"img/afb93ac016.jpg","21":"img/9aefe2b9fe.jpg","22":"img/dba99d7d71.jpg","23":"img/bce3e0c7a5.jpg","24":"img/9e0ab979f5.jpg","25":"img/48cfa026d7.jpg","26":"img/ecd92f84d6.jpg","27":"img/d77663d975.jpg","28":"img/aef6567aba.jpg","29":"img/6c3e68e38d.jpg","30":"img/dc855af31e.jpg","31":"img/7e4ba5a17f.jpg","32":"img/d4a64ae7b0.jpg","33":"img/3eaf56d775.jpg","34":"img/fc278f8b60.jpg","35":"img/387a65a176.jpg","36":"img/48424713f4.jpg","37":"img/af549f53f6.jpg","38":"img/c03093f036.jpg","39":"img/3efd58f363.jpg","40":"img/aaa9b2748b.jpg","41":"img/e2bc5c0ff5.jpg","42":"img/f6f5b5f71d.jpg","43":"img/4afcffe290.jpg","44":"img/c71cef43d4.jpg","45":"img/dfe2849f94.jpg","46":"img/89d9ac9c6a.jpg","47":"img/cd1e05a35d.jpg","48":"img/b1a4813cba.jpg","49":"img/dfb31970e0.jpg","50":"img/da0ff1b1d1.jpg","51":"img/ced614ebe6.jpg","52":"img/bbe413f79f.jpg","53":"img/49179ae4a0.jpg","54":"img/ba4f02d95f.jpg","55":"img/d171811003.jpg","56":"img/424b816f98.jpg","57":"img/9f18018506.jpg","58":"img/1c547f1321.jpg","59":"img/05a0196cc3.jpg","60":"img/6efab05c1b.jpg","61":"img/ec74b30464.jpg","62":"img/67070db2f7.jpg","63":"img/3b4b223e97.jpg","64":"img/ece43db312.jpg"};
+const PRODUCTS=[
+{num:1,id:'n01',fam:'Aromático Amadeirado',insp:'Chanel · Bleu de Chanel',orig:1050,price:100,stock:0,line:'Masculino',img:POSTERS['1'],sold:1},
+{num:2,id:'n02',fam:'Ambarado Gourmand',insp:'Parfums de Marly · Althaïr',orig:1850,price:125,stock:1,line:'Masculino',img:POSTERS['2']},
+{num:3,id:'n03',fam:'Íris & Couro',insp:'Dior · Homme Intense',orig:850,price:100,stock:0,line:'Masculino',img:POSTERS['3']},
+{num:4,id:'n04',fam:'Amadeirado Elegante',insp:'Dior · Homme Parfum',orig:880,price:100,stock:0,line:'Masculino',img:POSTERS['4']},
+{num:5,id:'n05',fam:'Amadeirado Mineral',insp:"Hermès · Terre d'Hermès",orig:780,price:100,stock:2,line:'Masculino',img:POSTERS['5']},
+{num:6,id:'n06',fam:'Aromático Doce',insp:'Armani · Stronger With You Intensely',orig:620,price:100,stock:3,line:'Masculino',img:POSTERS['6']},
+{num:7,id:'n07',fam:'Cítrico Amadeirado',insp:'Louis Vuitton · Imagination',orig:2290,price:125,stock:1,line:'Masculino',img:POSTERS['7']},
+{num:8,id:'n08',fam:'Aquático Amadeirado',insp:'Paco Rabanne · Invictus',orig:580,price:100,stock:5,line:'Masculino',img:POSTERS['8']},
+{num:9,id:'n09',fam:'Frutado Chipre',insp:'Creed · Aventus',orig:3100,price:125,stock:3,line:'Masculino',img:POSTERS['9']},
+{num:10,id:'n10',fam:'Frutado Amadeirado',insp:'Armaf · Club de Nuit Intense Man',orig:0,price:100,stock:3,line:'Masculino',img:POSTERS['10']},
+{num:11,id:'n11',fam:'Aquático Cítrico',insp:'Giorgio Armani · Acqua di Giò',orig:680,price:100,stock:2,line:'Masculino',img:POSTERS['11']},
+{num:12,id:'n12',fam:'Amadeirado Verde',insp:'Nishane · Hacivat',orig:1700,price:125,stock:2,line:'Masculino',img:POSTERS['12']},
+{num:13,id:'n13',fam:'Doce Aromático',insp:'Jean Paul Gaultier · Ultra Male',orig:680,price:100,stock:0,line:'Masculino',img:POSTERS['13']},
+{num:14,id:'n14',fam:'Âmbar Especiado',insp:'Lattafa · Asad Elixir',orig:0,price:100,stock:3,line:'Masculino',img:POSTERS['14']},
+{num:15,id:'n15',fam:'Fresco Especiado',insp:'Dior · Sauvage',orig:750,price:100,stock:4,line:'Masculino',img:POSTERS['15']},
+{num:16,id:'n16',fam:'Fresco Aromático',insp:'Yves Saint Laurent · Y',orig:680,price:100,stock:4,line:'Masculino',img:POSTERS['16']},
+{num:17,id:'n17',fam:'Amadeirado Anisado',insp:'Carolina Herrera · 212 VIP Black',orig:580,price:100,stock:3,line:'Masculino',img:POSTERS['17']},
+{num:18,id:'n18',fam:'Amadeirado Oud',insp:'Tom Ford · Oud Wood',orig:2200,price:125,stock:0,line:'Masculino',img:POSTERS['18'],sold:1},
+{num:19,id:'n19',fam:'Aromático Fougère',insp:'Versace · Eros',orig:520,price:100,stock:3,line:'Masculino',img:POSTERS['19']},
+{num:20,id:'n20',fam:'Aquático Aromático',insp:'Davidoff · Cool Water',orig:0,price:100,stock:0,line:'Masculino',img:POSTERS['20']},
+{num:21,id:'n21',fam:'Oriental Doce',insp:'Joop! · Homme',orig:0,price:100,stock:3,line:'Masculino',img:POSTERS['21']},
+{num:22,id:'n22',fam:'Amadeirado Especiado',insp:'Paco Rabanne · 1 Million Royal',orig:700,price:100,stock:0,line:'Masculino',img:POSTERS['22']},
+{num:23,id:'n23',fam:'Amadeirado Fresco',insp:'Burberry · Hero',orig:580,price:100,stock:0,line:'Masculino',img:POSTERS['23'],sold:1},
+{num:24,id:'n24',fam:'Aromático Doce',insp:'Paco Rabanne · Invictus Victory Elixir',orig:720,price:100,stock:2,line:'Masculino',img:POSTERS['24']},
+{num:25,id:'n25',fam:'Amadeirado Aromático',insp:'Jacques Bogart · Silver Scent Black',orig:0,price:100,stock:5,line:'Masculino',img:POSTERS['25']},
+{num:26,id:'n26',fam:'Oriental Amadeirado',insp:'Giorgio Armani · Armani Code',orig:620,price:100,stock:3,line:'Masculino',img:POSTERS['26']},
+{num:27,id:'n27',fam:'Oriental Especiado',insp:'Dolce & Gabbana · The One',orig:620,price:100,stock:2,line:'Masculino',img:POSTERS['27']},
+{num:28,id:'n28',fam:'Floral Ambarado',insp:'Yves Saint Laurent · Libre Intense',orig:820,price:100,stock:0,line:'Feminino',img:POSTERS['28'],sold:1},
+{num:29,id:'n29',fam:'Floral Aromático',insp:'Yves Saint Laurent · Libre',orig:750,price:100,stock:1,line:'Feminino',img:POSTERS['29']},
+{num:30,id:'n30',fam:'Chipre Floral',insp:'Chanel · Coco Mademoiselle',orig:1050,price:100,stock:0,line:'Feminino',img:POSTERS['30'],sold:1},
+{num:31,id:'n31',fam:'Oriental Especiado',insp:'Chanel · Coco',orig:1000,price:100,stock:5,line:'Feminino',img:POSTERS['31']},
+{num:32,id:'n32',fam:'Floral Frutado',insp:'Parfums de Marly · Delina',orig:1700,price:125,stock:2,line:'Feminino',img:POSTERS['32']},
+{num:33,id:'n33',fam:'Amendoado Oriental',insp:'Dior · Hypnotic Poison',orig:750,price:100,stock:0,line:'Feminino',img:POSTERS['33'],sold:1},
+{num:34,id:'n34',fam:'Floral Branco',insp:"Givenchy · L'Interdit",orig:750,price:100,stock:2,line:'Feminino',img:POSTERS['34']},
+{num:35,id:'n35',fam:'Floral Ambarado',insp:'Prada · Paradoxe',orig:800,price:100,stock:1,line:'Feminino',img:POSTERS['35']},
+{num:36,id:'n36',fam:'Floral Frutado',insp:'Carolina Herrera · 212 VIP Rosé',orig:560,price:100,stock:0,line:'Feminino',img:POSTERS['36'],sold:1},
+{num:37,id:'n37',fam:'Baunilha Salinada',insp:'Paco Rabanne · Olympéa',orig:620,price:100,stock:4,line:'Feminino',img:POSTERS['37']},
+{num:38,id:'n38',fam:'Floral Melado',insp:'Jean Paul Gaultier · Scandal',orig:680,price:100,stock:3,line:'Feminino',img:POSTERS['38']},
+{num:39,id:'n39',fam:'Floral Amadeirado',insp:'Chloé',orig:750,price:100,stock:2,line:'Feminino',img:POSTERS['39']},
+{num:40,id:'n40',fam:'Gourmand Floral',insp:'Lancôme · La Vie Est Belle',orig:800,price:100,stock:0,line:'Feminino',img:POSTERS['40'],sold:1},
+{num:41,id:'n41',fam:'Floral Sedutor',insp:'Carolina Herrera · La Bomba',orig:500,price:100,stock:1,line:'Feminino',img:POSTERS['41']},
+{num:42,id:'n42',fam:'Floral Almiscarado',insp:'Giorgio Armani · My Way',orig:720,price:100,stock:4,line:'Feminino',img:POSTERS['42']},
+{num:43,id:'n43',fam:'Floral Frutado Chipre',insp:'Yves Saint Laurent · Mon Paris',orig:720,price:100,stock:0,line:'Feminino',img:POSTERS['43'],sold:1},
+{num:44,id:'n44',fam:'Floral Chipre',insp:'Dior · Miss Dior',orig:900,price:100,stock:2,line:'Feminino',img:POSTERS['44']},
+{num:45,id:'n45',fam:'Floral Frutado',insp:'Armaf · Club de Nuit Woman',orig:0,price:100,stock:2,line:'Feminino',img:POSTERS['45']},
+{num:46,id:'n46',fam:'Floral Baunilha',insp:'Guerlain · Mon Guerlain',orig:750,price:100,stock:2,line:'Feminino',img:POSTERS['46']},
+{num:47,id:'n47',fam:'Gourmand Floral',insp:'Lancôme · La Nuit Trésor',orig:800,price:100,stock:1,line:'Feminino',img:POSTERS['47']},
+{num:48,id:'n48',fam:'Gourmand Cereja',insp:'Tom Ford · Lost Cherry',orig:2300,price:125,stock:2,line:'Feminino',img:POSTERS['48']},
+{num:49,id:'n49',fam:'Couro Amendoado',insp:'Tom Ford · F***ing Fabulous',orig:2400,price:125,stock:3,line:'Unissex',img:POSTERS['49']},
+{num:50,id:'n50',fam:'Floral Amadeirado',insp:'Nishane · Hundred Silent Ways',orig:1900,price:125,stock:3,line:'Unissex',img:POSTERS['50']},
+{num:51,id:'n51',fam:'Especiado Gourmand',insp:'Tom Ford · Tobacco Vanille',orig:2300,price:125,stock:3,line:'Unissex',img:POSTERS['51']},
+{num:52,id:'n52',fam:'Âmbar Oriental',insp:'Orientica · Royal Amber',orig:500,price:100,stock:5,line:'Unissex',img:POSTERS['52']},
+{num:53,id:'n53',fam:'Aromático Especiado',insp:'Giorgio Armani · Stronger With You',orig:0,price:100,stock:0,line:'Masculino',img:POSTERS['53'],macer:1},
+{num:54,id:'n54',fam:'Floral Amadeirado',insp:'Givenchy · Irresistible',orig:0,price:100,stock:0,line:'Feminino',img:POSTERS['54'],macer:1},
+{num:55,id:'n55',fam:'Amadeirado Floral',insp:'Carolina Herrera · Cedar Chic',orig:0,price:100,stock:0,line:'Unissex',img:POSTERS['55'],macer:1},
+{num:56,id:'n56',fam:'Aromático Amadeirado',insp:'Hugo Boss · Boss Bottled Infinite',orig:0,price:100,stock:0,line:'Masculino',img:POSTERS['56'],macer:1},
+{num:57,id:'n57',fam:'Gourmand Floral',insp:'Lancôme · La Vie Est Belle',orig:0,price:100,stock:0,line:'Feminino',img:POSTERS['57'],macer:1},
+{num:58,id:'n58',fam:'Cítrico Amadeirado',insp:'Louis Vuitton · Imagination',orig:0,price:125,stock:0,line:'Masculino',img:POSTERS['58'],macer:1},
+{num:59,id:'n59',fam:'Floral Amendoado',insp:'Parfums de Marly · Valaya Exclusif',orig:0,price:125,stock:0,line:'Feminino',img:POSTERS['59'],macer:1},
+{num:60,id:'n60',fam:'Gourmand Frutado',insp:'Burberry · Her Elixir',orig:0,price:100,stock:0,line:'Feminino',img:POSTERS['60'],macer:1},
+{num:61,id:'n61',fam:'Frutado Âmbar',insp:'Xerjoff · Erba Pura',orig:0,price:125,stock:0,line:'Unissex',img:POSTERS['61'],macer:1},
+{num:62,id:'n62',fam:'Amadeirado Floral',insp:'Sospiro · Vibrato',orig:0,price:125,stock:0,line:'Unissex',img:POSTERS['62'],macer:1},
+{num:63,id:'n63',fam:'Floral Branco',insp:"Givenchy · L'Interdit Absolu",orig:0,price:100,stock:0,line:'Feminino',img:POSTERS['63'],macer:1},
+{num:64,id:'n64',fam:'Aromático Amadeirado',insp:'Jean Paul Gaultier · Le Beau',orig:0,price:100,stock:0,line:'Masculino',img:POSTERS['64'],macer:1}
+];
+
+var INSTAGRAM = "https://www.instagram.com/cougarparfum/";
+var BRL = function(n){ return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:0}); };
+var $ = function(s){ return document.querySelector(s); };
+var cart = {};
+try{ var sv=JSON.parse(localStorage.getItem('cougar_cart')||'{}'); if(sv&&typeof sv==='object') cart=sv; }catch(e){}
+function persist(){ try{ localStorage.setItem('cougar_cart', JSON.stringify(cart)); }catch(e){} }
+function pad(n){ return (n<10?'0':'')+n; }
+function byId(id){ return PRODUCTS.find(function(p){return p.id===id;}); }
+
+var filter='todos'; var shownList=[]; var lbIndex=0;
+function hasEstoque(){ return (location.hash||'').toLowerCase().indexOf('estoque')>=0; }
+var ADMIN = hasEstoque();
+function initAdmin(){ if(ADMIN && !document.getElementById('fEsg')){ var b=document.createElement('button'); b.id='fEsg'; b.setAttribute('data-f','esgotado'); b.setAttribute('aria-pressed','false'); b.textContent='Esgotados'; var fb=document.getElementById('filters'); if(fb) fb.appendChild(b); } }
+window.addEventListener('hashchange', function(){ location.reload(); });
+function stockTag(p){
+  if(p.macer) return '<span class="stk pre">Em maceração</span>';
+  if(p.sold) return '<span class="stk pre">Esgotado</span>';
+  if(p.stock<=0) return '<span class="stk pre">Pré-venda</span>';
+  if(p.stock<=6) return '<span class="stk low">Últimas '+p.stock+'</span>';
+  return '<span class="stk">Pronta entrega</span>';
+}
+function cardHtml(p){
+  var orig = p.orig ? '<span class="anchor"><span class="alabel">preço médio do original</span><span class="orig">'+BRL(p.orig)+'</span></span>' : '';
+  var pre = p.stock<=0;
+  return '<article class="card">'+
+    '<button class="pic" data-zoom="'+p.id+'" aria-label="Ampliar Nº '+pad(p.num)+'"><img src="'+p.img+'" alt="Cougar Parfum Nº '+pad(p.num)+'"><span class="zoom">Ampliar</span></button>'+
+    '<div class="body">'+
+      '<div class="top"><span class="num">Nº '+pad(p.num)+'</span>'+stockTag(p)+'</div>'+
+      '<div class="fam">'+p.fam+'</div>'+
+      (p.insp?'<div class="insp">inspiração: <b>'+p.insp+'</b></div>':'')+
+      '<div class="price">'+orig+'<span class="now">'+BRL(p.price)+' <small>Extrait 30–40%</small></span></div>'+
+      '<button class="add'+(pre?' pre':'')+'"'+(p.sold?' disabled':'')+' data-add="'+p.id+'">'+(p.sold?'Esgotado':(pre?'Reservar':'Adicionar'))+'</button>'+
+    '</div></article>';
+}
+function renderGrid(){
+  if(filter==='esgotado'){ var le=PRODUCTS.filter(function(p){ return ADMIN && p.sold; }); shownList=le; $('#grid').innerHTML=le.map(cardHtml).join(''); return; }
+  if(filter==='maceracao'){ var lm=PRODUCTS.filter(function(p){ return p.macer; }); shownList=lm; $('#grid').innerHTML=lm.map(cardHtml).join(''); return; }
+  if(filter==='nicho'){
+    var nicho=PRODUCTS.filter(function(p){ return !p.sold && !p.macer && p.price>=125; });
+    var groups=[['Masculino','Masculino'],['Feminino','Feminino'],['Unissex','Unissex']];
+    var html=''; shownList=[];
+    groups.forEach(function(g){ var it=nicho.filter(function(p){return p.line===g[1];}); if(it.length){ html+='<h3 class="grouphd">'+g[0]+'</h3>'+it.map(cardHtml).join(''); shownList=shownList.concat(it); } });
+    $('#grid').innerHTML=html; return;
+  }
+  var list=PRODUCTS.filter(function(p){ return !p.sold && !p.macer && (filter==='todos' || p.line===filter); });
+  shownList=list;
+  $('#grid').innerHTML=list.map(cardHtml).join('');
+}
+function count(){ return Object.values(cart).reduce(function(a,b){return a+b;},0); }
+function total(){ return Object.keys(cart).reduce(function(s,id){ var p=byId(id); return s+(p?p.price*cart[id]:0); },0); }
+function renderCart(){
+  $('#bagCt').textContent = count();
+  var ids=Object.keys(cart);
+  if(!ids.length){ $('#ditems').innerHTML='<div class="empty"><span class="serif">Sua sacola está vazia</span>Explore a coleção e adicione suas fragrâncias.</div>'; }
+  else { $('#ditems').innerHTML = ids.map(function(id){ var p=byId(id); if(!p) return ''; var q=cart[id];
+    return '<div class="ditem"><img src="'+p.img+'" alt="Nº '+pad(p.num)+'">'+
+      '<div><div class="nm">Nº '+pad(p.num)+'</div><div class="mt">'+(p.stock<=0?'Pré-venda':p.fam)+'</div>'+
+      '<div class="qty"><button data-dec="'+id+'">−</button><span>'+q+'</span><button data-inc="'+id+'">+</button></div>'+
+      '<button class="rm" data-rm="'+id+'">Remover</button></div>'+
+      '<div class="pr">'+BRL(p.price*q)+'</div></div>'; }).join(''); }
+  $('#sub').textContent = BRL(total()); persist();
+}
+function openCart(){ $('#drawer').classList.add('show'); $('#scrim').classList.add('show'); }
+function closeCart(){ $('#drawer').classList.remove('show'); $('#scrim').classList.remove('show'); }
+function toast(m){ var t=$('#toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('show');},2200); }
+function showLbAt(i){ if(!shownList.length) return; lbIndex=(i+shownList.length)%shownList.length; var p=shownList[lbIndex]; $('#lbimg').src=p.img; $('#lbimg').alt='Cougar Parfum Nº '+pad(p.num); }
+function openLb(id){ lbIndex=shownList.findIndex(function(p){return p.id===id;}); if(lbIndex<0) lbIndex=0; showLbAt(lbIndex); $('#lb').classList.add('show'); }
+function navLb(d){ showLbAt(lbIndex+d); }
+function closeLb(){ $('#lb').classList.remove('show'); $('#lbimg').src=''; }
+
+document.addEventListener('click', function(e){
+  var z=e.target.closest('[data-zoom]'); if(z){ openLb(z.getAttribute('data-zoom')); return; }
+  var add=e.target.closest('[data-add]'); if(add){ var id=add.getAttribute('data-add'); var p=byId(id); if(p.sold){ return; } cart[id]=(cart[id]||0)+1; renderCart(); toast('<b>Nº '+pad(p.num)+'</b> na sacola'); openCart(); return; }
+  var inc=e.target.closest('[data-inc]'); if(inc){ var i2=inc.getAttribute('data-inc'); var p2=byId(i2); if(p2.stock<=0||cart[i2]<p2.stock) cart[i2]++; else toast('Só temos <b>'+p2.stock+'</b> em estoque'); renderCart(); return; }
+  var dec=e.target.closest('[data-dec]'); if(dec){ var i3=dec.getAttribute('data-dec'); cart[i3]--; if(cart[i3]<=0) delete cart[i3]; renderCart(); return; }
+  var rm=e.target.closest('[data-rm]'); if(rm){ delete cart[rm.getAttribute('data-rm')]; renderCart(); return; }
+  var f=e.target.closest('#filters button'); if(f){ filter=f.getAttribute('data-f'); [].forEach.call(document.querySelectorAll('#filters button'),function(b){b.setAttribute('aria-pressed',b===f?'true':'false');}); renderGrid(); return; }
+});
+$('#bagBtn').addEventListener('click', openCart);
+$('#closeCart').addEventListener('click', closeCart);
+$('#scrim').addEventListener('click', closeCart);
+$('#lb').addEventListener('click', function(e){ if(e.target.id==='lb'||e.target.id==='lbx') closeLb(); });
+$('#lbx').addEventListener('click', closeLb);
+$('#lbprev').addEventListener('click', function(e){ e.stopPropagation(); navLb(-1); });
+$('#lbnext').addEventListener('click', function(e){ e.stopPropagation(); navLb(1); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeLb(); closeCart(); $('#modal').classList.remove('show'); } if($('#lb').classList.contains('show')){ if(e.key==='ArrowLeft') navLb(-1); if(e.key==='ArrowRight') navLb(1); } });
+
+$('#checkout').addEventListener('click', function(){
+  if(!count()){ toast('Sua sacola está vazia'); return; }
+  var ids=Object.keys(cart);
+  $('#sumlist').innerHTML = ids.map(function(id){ var p=byId(id); return '<div class="sumrow"><span>'+cart[id]+'× Nº '+pad(p.num)+'</span><span>'+BRL(p.price*cart[id])+'</span></div>'; }).join('');
+  $('#modtot').textContent = BRL(total()); $('#modal').classList.add('show'); closeCart();
+});
+$('#modal').addEventListener('click', function(e){ if(e.target.id==='modal') $('#modal').classList.remove('show'); });
+function orderText(){ var ids=Object.keys(cart); if(!ids.length) return ''; var ls=ids.map(function(id){ var p=byId(id); return '• '+cart[id]+'x Cougar Nº '+pad(p.num)+' — '+BRL(p.price*cart[id]); }); return 'Essas foram minhas escolhas do site da Cougar Parfum:\n\n'+ls.join('\n')+'\n\nTotal: '+BRL(total()); }
+function fallbackCopy(t){ try{ var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); toast('Pedido copiado — cole no WhatsApp'); }catch(e){ toast('Anote os itens e mande no WhatsApp <b>(48) 99216-6905</b>'); } }
+$('#copyOrder').addEventListener('click', function(){ var t=orderText(); if(!t){ toast('Sua sacola está vazia'); return; } try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ toast('Pedido copiado — cole no WhatsApp'); }, function(){ fallbackCopy(t); }); } else fallbackCopy(t); }catch(e){ fallbackCopy(t); } });
+
+$('#waCheckout').addEventListener('click', function(e){ e.preventDefault(); var t=orderText(); if(!t){ toast('Sua sacola está vazia'); return; } window.open('https://wa.me/5548992166905?text='+encodeURIComponent(t), '_blank'); });
+if('scrollRestoration' in history){ try{ history.scrollRestoration='manual'; }catch(e){} }
+var _userScrolled=false;
+['wheel','touchmove','keydown','mousedown'].forEach(function(ev){ window.addEventListener(ev, function(){ _userScrolled=true; }, {passive:true}); });
+function _toTop(){ if(!_userScrolled){ window.scrollTo(0,0); } }
+_toTop(); window.addEventListener('load', _toTop); setTimeout(_toTop, 250);
+initAdmin(); renderGrid(); renderCart();
+</script>
+</body>
+</html>
