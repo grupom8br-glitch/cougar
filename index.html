@@ -193,6 +193,8 @@ footer .legal .gold{color:#c9a24b}
 .modal .tot{display:flex; justify-content:space-between; padding:16px 0 4px; font-family:var(--serif); font-size:22px}
 .modal .wpp{display:block; width:100%; text-align:center; margin-top:14px; padding:15px 30px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; background:var(--gold-deep); color:#fff; border:1px solid var(--gold-deep); transition:.22s}
 .modal .wpp:hover{background:transparent; color:var(--gold-deep)}
+.modal .how{margin:18px 0 6px; padding:16px 0 0 18px; border-top:1px solid var(--line); font-size:13px; color:var(--soft); line-height:1.55}
+.modal .how li{margin:0 0 8px} .modal .how b{color:var(--ink); font-weight:500}
 .modal .wpp.alt{background:transparent; color:var(--gold-deep)} .modal .wpp.alt:hover{background:var(--gold-deep); color:#fff}
 .modal .mnote{font-size:12px; color:var(--soft); margin-top:16px; line-height:1.6}
 
@@ -309,16 +311,21 @@ footer .legal .gold{color:#c9a24b}
   <div class="ditems" id="ditems"></div>
   <div class="dfoot">
     <div class="sub"><span class="s-l">Subtotal</span><span class="s-v" id="sub">R$ 0</span></div>
-    <p class="note">Frete e pré-venda combinados no fechamento.</p>
+    <p class="note">Pagamento e entrega são finalizados pelo WhatsApp. Grande Florianópolis: entrega a combinar. Demais regiões: frete cotado antes do link de pagamento.</p>
     <button class="btn" id="checkout">Finalizar reserva</button>
   </div>
 </aside>
 
 <div class="modal" id="modal"><div class="card2">
   <h3>Finalizar reserva</h3>
-  <p style="font-size:13px;color:var(--soft);margin:0 0 18px">Confira os itens e toque em <b>Enviar pelo WhatsApp</b> — seu pedido vai pré-preenchido e a gente combina pagamento e entrega.</p>
+  <p style="font-size:13px;color:var(--soft);margin:0 0 18px">Confira os itens e toque em <b>Enviar pedido pelo WhatsApp</b>. Seu pedido vai pré-preenchido.</p>
   <div id="sumlist"></div>
-  <div class="tot"><span>Total</span><span id="modtot">R$ 0</span></div>
+  <div class="tot"><span>Subtotal <small style="font-family:var(--sans);font-size:11px;color:var(--faint)">sem frete</small></span><span id="modtot">R$ 0</span></div>
+  <ol class="how">
+    <li><b>Envie o pedido</b> pelo WhatsApp com o botão abaixo.</li>
+    <li><b>Entrega:</b> na Grande Florianópolis, combinamos com você. Fora da região, fazemos a cotação do frete pelo seu CEP.</li>
+    <li><b>Pagamento:</b> enviamos um link do Mercado Pago com o valor total. PIX ou cartão.</li>
+  </ol>
   <a class="wpp" id="waCheckout" href="https://wa.me/5548992166905" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
   <button class="wpp alt" id="copyOrder">Copiar pedido</button>
   <p class="mnote">Vai abrir o WhatsApp com seu pedido já escrito — é só tocar em enviar. 💬</p>
@@ -489,7 +496,7 @@ $('#checkout').addEventListener('click', function(){
   $('#modtot').textContent = BRL(total()); $('#modal').classList.add('show'); closeCart();
 });
 $('#modal').addEventListener('click', function(e){ if(e.target.id==='modal') $('#modal').classList.remove('show'); });
-function orderText(){ var ids=Object.keys(cart); if(!ids.length) return ''; var ls=ids.map(function(id){ var p=byId(id); return '• '+cart[id]+'x Cougar Nº '+pad(p.num)+' — '+BRL(p.price*cart[id]); }); return 'Essas foram minhas escolhas do site da Cougar Parfum:\n\n'+ls.join('\n')+'\n\nTotal: '+BRL(total()); }
+function orderText(){ var ids=Object.keys(cart); if(!ids.length) return ''; var ls=ids.map(function(id){ var p=byId(id); return '• '+cart[id]+'x Cougar Nº '+pad(p.num)+' — '+BRL(p.price*cart[id]); }); return 'Essas foram minhas escolhas do site da Cougar Parfum:\n\n'+ls.join('\n')+'\n\nSubtotal (sem frete): '+BRL(total())+'\n\nMeu CEP para entrega: '; }
 function fallbackCopy(t){ try{ var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); toast('Pedido copiado — cole no WhatsApp'); }catch(e){ toast('Anote os itens e mande no WhatsApp <b>(48) 99216-6905</b>'); } }
 $('#copyOrder').addEventListener('click', function(){ var t=orderText(); if(!t){ toast('Sua sacola está vazia'); return; } try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ toast('Pedido copiado — cole no WhatsApp'); }, function(){ fallbackCopy(t); }); } else fallbackCopy(t); }catch(e){ fallbackCopy(t); } });
 
