@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cougar Parfum</title>
-<meta name="description" content="Cougar Parfum — Extrait de Parfum 30–40%. Coleção numerada, inspirada nos grandes clássicos, em tiragem limitada.">
+<meta name="description" content="Cougar Parfum — perfumes exclusivos de 30 a 40% de concentração de essência: até o dobro de um perfume comum. Coleção numerada, tiragem limitada.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -65,6 +65,32 @@ header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background
 @media (max-width:640px){
   .herotrio{height:72vh; min-height:440px}
 }
+.heroslides{position:relative; aspect-ratio:16/9; max-height:86vh; width:100%; overflow:hidden; background:var(--black)}
+.heroslides .sl{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; opacity:0; transition:opacity 1.6s ease}
+.heroslides .sl.on{opacity:1}
+.heroslides .shade{position:absolute; inset:0; background:linear-gradient(to right, rgba(12,9,6,.72) 0%, rgba(12,9,6,.38) 30%, rgba(12,9,6,0) 52%)}
+.heroslides .txt{position:absolute; inset:0; display:flex; align-items:center}
+.heroslides .txt .wrap{width:100%}
+.heroslides .eyebrow{color:#d9c08a; font-size:10px; letter-spacing:.32em}
+.heroslides h1{font-family:var(--serif); font-weight:400; color:#f4ede0; font-size:clamp(26px,3.3vw,46px); line-height:1.14; max-width:17ch; margin:18px 0 0; letter-spacing:.005em}
+.heroslides h1 em{font-style:italic; color:#d9c08a}
+.heroslides .cta{margin-top:30px}
+.heroslides .btn{background:transparent; color:#f4ede0; border:1px solid rgba(244,237,224,.6); padding:13px 28px}
+.heroslides .btn:hover{background:#f4ede0; color:var(--ink)}
+@media (max-width:640px){
+  .heroslides{aspect-ratio:auto; max-height:none; overflow:visible}
+  .heroslides .frame{position:relative; aspect-ratio:1/1; overflow:hidden}
+  .heroslides .sl{object-position:100% center}
+  .heroslides .shade{display:none}
+  .heroslides .txt{position:static; display:block; padding:30px 0 38px; background:var(--black)}
+  .heroslides h1{font-size:27px; max-width:20ch}
+}
+@media (min-width:641px){ .heroslides .frame{position:absolute; inset:0} }
+.casa .story p{margin:0 0 14px}
+.herocopy .perks{list-style:none; padding:0; margin:30px auto 4px; display:flex; justify-content:center; gap:clamp(18px,5vw,56px); flex-wrap:wrap}
+.herocopy .perks li{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#cfc8ba; display:flex; flex-direction:column; align-items:center; gap:4px}
+.herocopy .perks b{font-family:var(--serif); font-size:26px; letter-spacing:0; text-transform:none; color:#e8cf93; font-weight:500}
+.casa .story .strong{font-weight:500; color:var(--ink)}
 
 .collection{padding-block:clamp(40px,6vw,72px); border-top:1px solid var(--line)}
 .sec-head{text-align:center; max-width:60ch; margin:0 auto 38px}
@@ -189,27 +215,43 @@ footer .legal .gold{color:#c9a24b}
 </head>
 <body>
 
-<div class="util">Extrait de Parfum · 30–40% de concentração de essência &nbsp;·&nbsp; <b>Pré-venda aberta</b> &nbsp;·&nbsp; Tiragem limitada</div>
+<div class="util">Até 2x mais essência que um perfume comum &nbsp;·&nbsp; <b>Pré-venda aberta</b> &nbsp;·&nbsp; Tiragem limitada</div>
 
 <header>
   <nav class="nav">
-    <div class="links"><a href="#colecao">A Coleção</a><a href="#casa">A Casa</a><a href="#contato">Contato</a></div>
+    <div class="links"><a href="#colecao">A Coleção</a><a href="#casa">Nossa História</a><a href="#contato">Contato</a></div>
     <a href="#top" class="brand" aria-label="Cougar Parfum"><div class="name">Cougar Parfum</div><div class="sub">Extrait de Parfum</div></a>
     <div class="right"><button class="bag" id="bagBtn"><span class="word">Sacola</span> <span class="ct" id="bagCt">0</span></button></div>
   </nav>
-  <div class="menu-links"><a href="#colecao">Coleção</a><a href="#casa">A Casa</a><a href="#contato">Contato</a></div>
+  <div class="menu-links"><a href="#colecao">Coleção</a><a href="#casa">Nossa História</a><a href="#contato">Contato</a></div>
 </header>
 
 <a id="top"></a>
 <section class="hero">
-  <div class="herotrio">
-    <img src="img/711e348624.jpg" alt="Cougar Parfum — coleção numerada">
+  <div class="heroslides" id="heroslides">
+    <div class="frame">
+      <img class="sl on" src="img/capa-fem.jpg" alt="Cougar Parfum — frasco rosé em closet ao entardecer">
+      <img class="sl" src="img/capa-masc.jpg" alt="Cougar Parfum — frasco âmbar em closet com vista para o Cambirela">
+      <div class="shade"></div>
+    </div>
+    <div class="txt"><div class="wrap">
+      <div class="eyebrow">Perfumes exclusivos · Alta concentração de essência</div>
+      <h1>Em qualquer ambiente que você chegar, seu carro fica lá fora. <em>Só o seu perfume entra com você.</em></h1>
+      <div class="cta"><a href="#colecao" class="btn">Ver a coleção</a></div>
+    </div></div>
   </div>
+  <script>
+  (function(){var r=document.getElementById('heroslides'); if(!r) return;
+    var sl=r.querySelectorAll('.sl'), i=0;
+    setInterval(function(){sl[i].classList.remove('on'); i=(i+1)%sl.length; sl[i].classList.add('on');}, 6600);
+  })();
+  </script>
   <div class="herocopy"><div class="wrap">
-    <div class="eyebrow">Alta concentração · Tiragem limitada</div>
-    <h1>Deixe seu <em>rastro</em>.</h1>
-    <p class="lead">Fragrâncias feitas para que você seja lembrado. Extrait de Parfum 30–40%.</p>
-    <div class="cta"><a href="#colecao" class="btn hero-btn">Ver a coleção</a><a href="#casa" class="btn-text light">Conheça a casa</a></div>
+    <div class="eyebrow">Exclusividade e alta concentração</div>
+    <h1>A concentração que você merece para <em>deixar seu rastro</em>.</h1>
+    <p class="lead">Um perfume comum tem de 15% a 20% de essência. Os nossos têm de 30 a 40% de concentração de essência, até o dobro. Na prática: mais horas na pele e um perfume que as pessoas sentem quando você passa.</p>
+    <ul class="perks"><li><b>Até 2x</b>mais essência</li><li><b>Fixação</b>prolongada</li><li><b>Notado</b>por onde passa</li></ul>
+    <div class="cta"><a href="#colecao" class="btn hero-btn">Ver a coleção</a><a href="#casa" class="btn-text light">Conheça nossa história</a></div>
   </div></div>
 </section>
 
@@ -232,14 +274,19 @@ footer .legal .gold{color:#c9a24b}
 
 <section class="casa" id="casa"><div class="wrap">
   <div>
-    <div class="eyebrow">A Casa</div>
-    <h2>Mais que perfume,<br>uma presença.</h2>
-    <p class="quote">"Alguns perfumes são feitos para serem sentidos. Outros, para serem lembrados."</p>
-    <p>A Cougar Parfum nasce de uma obsessão: concentração. Enquanto um eau de parfum comum trabalha entre 15% e 20% de essência, cada frasco Cougar carrega de 30% a 40% — fixação prolongada, projeção intensa e um rastro que permanece. Produção em pequenos lotes.</p>
-    <div class="signoff">Idealizada por Marcelo · Grupo M8</div>
+    <div class="eyebrow">Nossa História</div>
+    <h2>Já pensou em ser lembrado pelo perfume que você usa?</h2>
+    <div class="story">
+    <p>Imagine usar uma fragrância que você ama e, por onde passar, deixar seu rastro. Alguém sente o perfume quando você chega e pergunta: “Que perfume é esse?” Dias depois, sente aquele cheiro de novo e lembra de você. É assim que uma fragrância vira sua assinatura.</p>
+    <p>A Cougar Parfum nasceu porque eu queria viver isso. Eu estava cansado de pagar uma fortuna por perfumes que eu adorava, mas que mal se faziam notar ou sumiam rápido demais. Eu passava antes de sair e, algumas horas depois, já precisava encostar o nariz no pulso para sentir alguma coisa.</p>
+    <p>Aquilo virou uma obsessão. Comecei a formular em pequenos lotes, buscando fragrâncias que marcassem presença na chegada e que eu ainda tivesse prazer de sentir na pele horas depois.</p>
+    <p>Foi desse desejo que nasceu a Cougar Parfum. Perfumes de alta concentração de essência, de 30% a 40%. <span class="strong">Mais concentração porque você merece o melhor.</span></p>
+    <p>Deixe seu rastro.</p>
+    </div>
+    <div class="signoff">Marcelo, fundador da Cougar Parfum</div>
   </div>
   <ul class="spec">
-    <li><span class="k">Concentração</span><span class="v"><b>30–40%</b> de essência</span></li>
+    <li><span class="k">Concentração</span><span class="v">De <b>30 a 40%</b> de concentração de essência</span></li>
     <li><span class="k">Fixação</span><span class="v">Prolongada</span></li>
     <li><span class="k">Projeção</span><span class="v">Intensa</span></li>
     <li><span class="k">Volume</span><span class="v">50 ml</span></li>
@@ -249,7 +296,7 @@ footer .legal .gold{color:#c9a24b}
 
 <footer id="contato"><div class="wrap">
   <div><img class="flogo" src="img/423f859e06.png" alt="Cougar Parfum"><div class="tag">Deixe seu rastro.</div></div>
-  <div><h4>Navegar</h4><ul><li><a href="#colecao">A Coleção</a></li><li><a href="#casa">A Casa</a></li><li><a href="#top">Início</a></li></ul></div>
+  <div><h4>Navegar</h4><ul><li><a href="#colecao">A Coleção</a></li><li><a href="#casa">Nossa História</a></li><li><a href="#top">Início</a></li></ul></div>
   <div><h4>Contato</h4><ul><li><a id="igLink" href="https://www.instagram.com/cougarparfum/" target="_blank" rel="noopener">Instagram · @cougarparfum</a></li></ul></div>
   <div class="legal"><span>© 2026 Cougar Parfum · <span class="gold">Grupo M8 Brasil</span></span><span>Florianópolis · Santa Catarina</span></div>
 </div></footer>
@@ -378,7 +425,7 @@ function cardHtml(p){
       '<div class="top"><span class="num">Nº '+pad(p.num)+'</span>'+stockTag(p)+'</div>'+
       '<div class="fam">'+p.fam+'</div>'+
       (p.insp?'<div class="insp">inspiração: <b>'+p.insp+'</b></div>':'')+
-      '<div class="price">'+orig+'<span class="now">'+BRL(p.price)+' <small>Extrait 30–40%</small></span></div>'+
+      '<div class="price">'+orig+'<span class="now">'+BRL(p.price)+' <small>De 30 a 40% de concentração de essência</small></span></div>'+
       '<button class="add'+(pre?' pre':'')+'"'+(p.sold?' disabled':'')+' data-add="'+p.id+'">'+(p.sold?'Esgotado':(pre?'Reservar':'Adicionar'))+'</button>'+
     '</div></article>';
 }
