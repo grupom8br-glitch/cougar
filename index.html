@@ -131,12 +131,15 @@ header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background
 /* lightbox */
 .lb{position:fixed; inset:0; background:rgba(16,14,10,.93); display:none; align-items:center; justify-content:center; z-index:100; padding:20px}
 .lb.show{display:flex}
-.lb img{max-width:min(600px,96vw); max-height:92vh; object-fit:contain; box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.lb img{width:min(600px,92vw,calc(86vh * 0.8)); height:auto; aspect-ratio:4/5; object-fit:contain; box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.lbcount{position:absolute; bottom:18px; left:50%; transform:translateX(-50%); color:#fff; font-size:13px; letter-spacing:.18em; background:rgba(0,0,0,.45); padding:6px 14px; border-radius:20px; z-index:2; white-space:nowrap}
 .lbx{position:absolute; top:16px; right:22px; font-size:30px; line-height:1; color:#fff; background:none; border:0; z-index:2}
-.lbnav{position:absolute; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.35); color:#fff; font-size:28px; line-height:1; display:flex; align-items:center; justify-content:center; transition:.2s; z-index:2}
-.lbnav:hover{background:rgba(255,255,255,.26)}
-.lbprev{left:20px} .lbnext{right:20px}
-@media(max-width:560px){ .lbnav{width:42px; height:42px; font-size:23px} .lbprev{left:10px} .lbnext{right:10px} }
+.lbnav{position:absolute; top:50%; transform:translateY(-50%); width:62px; height:62px; border-radius:50%; background:#b8933f; border:2px solid #fff; color:#fff; font-size:38px; font-weight:700; line-height:1; display:flex; align-items:center; justify-content:center; transition:.2s; z-index:2; box-shadow:0 6px 24px rgba(0,0,0,.55); cursor:pointer; padding-bottom:4px}
+.lbnav:hover{background:#d4ad55; transform:translateY(-50%) scale(1.08)}
+.lbprev{left:24px} .lbnext{right:24px}
+@keyframes lbpulse{0%,100%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(212,173,85,.7)}50%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 12px rgba(212,173,85,0)}}
+.lbnext{animation:lbpulse 1.8s ease-in-out 3}
+@media(max-width:560px){ .lbnav{width:50px; height:50px; font-size:30px} .lbprev{left:8px} .lbnext{right:8px} }
 
 .casa{margin-top:clamp(52px,8vw,100px); background:var(--cream); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
 .casa .wrap{padding-block:clamp(52px,8vw,104px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,88px); align-items:center}
@@ -304,7 +307,7 @@ footer .legal .gold{color:#c9a24b}
   <div class="legal"><span>© 2026 Cougar Parfum · <span class="gold">Grupo M8 Brasil</span></span><span>Florianópolis · Santa Catarina</span></div>
 </div></footer>
 
-<div class="lb" id="lb"><button class="lbx" id="lbx" aria-label="Fechar">×</button><button class="lbnav lbprev" id="lbprev" aria-label="Anterior">‹</button><img id="lbimg" src="" alt=""><button class="lbnav lbnext" id="lbnext" aria-label="Próximo">›</button></div>
+<div class="lb" id="lb"><button class="lbx" id="lbx" aria-label="Fechar">×</button><button class="lbnav lbprev" id="lbprev" aria-label="Anterior">‹</button><img id="lbimg" src="" alt=""><div class="lbcount" id="lbcount"></div><button class="lbnav lbnext" id="lbnext" aria-label="Próximo">›</button></div>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Sacola">
@@ -335,7 +338,7 @@ footer .legal .gold{color:#c9a24b}
 <div id="toast"></div>
 
 <script>
-const POSTERS={"1":"img/v2_01.jpg","2":"img/v2_02.jpg","3":"img/v2_03.jpg","4":"img/v2_04.jpg","5":"img/v2_05.jpg","6":"img/v2_06.jpg","7":"img/v2_07.jpg","8":"img/v2_08.jpg","9":"img/v2_09.jpg","10":"img/v2_10.jpg","11":"img/v2_11.jpg","12":"img/v2_12.jpg","13":"img/v2_13.jpg","14":"img/v2_14.jpg","15":"img/v2_15.jpg","16":"img/v2_16.jpg","17":"img/v2_17.jpg","18":"img/v2_18.jpg","19":"img/v2_19.jpg","20":"img/v2_20.jpg","21":"img/v2_21.jpg","22":"img/v2_22.jpg","23":"img/v2_23.jpg","24":"img/v2_24.jpg","25":"img/v2_25.jpg","26":"img/v2_26.jpg","27":"img/v2_27.jpg","28":"img/v2_28.jpg","29":"img/v2_29.jpg","30":"img/dc855af31e.jpg","31":"img/v2_31.jpg","32":"img/v2_32.jpg","33":"img/v2_33.jpg","34":"img/v2_34.jpg","35":"img/v2_35.jpg","36":"img/v2_36.jpg","37":"img/v2_37.jpg","38":"img/v2_38.jpg","39":"img/v2_39.jpg","40":"img/v2_40.jpg","41":"img/v2_41.jpg","42":"img/v2_42.jpg","43":"img/v2_43.jpg","44":"img/v2_44.jpg","45":"img/v2_45.jpg","46":"img/v2_46.jpg","47":"img/v2_47.jpg","48":"img/v2_48.jpg","49":"img/v2_49.jpg","50":"img/v2_50.jpg","51":"img/v2_51.jpg","52":"img/v2_52.jpg","53":"img/v2_53.jpg","54":"img/v2_54.jpg","55":"img/v2_55.jpg","56":"img/v2_56.jpg","57":"img/v2_57.jpg","58":"img/v2_58.jpg","59":"img/v2_59.jpg","60":"img/v2_60.jpg","61":"img/v2_61.jpg","62":"img/v2_62.jpg","63":"img/v2_63.jpg","64":"img/v2_64.jpg","65":"img/n65allure.jpg","66":"img/v2_66.jpg","68":"img/v2_68.jpg","67":"img/v2_67.jpg","70":"img/v2_70.jpg","69":"img/v2_69.jpg"};
+const POSTERS={"1":"img/v2_01.jpg","2":"img/v2_02.jpg","3":"img/v2_03.jpg","4":"img/v2_04.jpg","5":"img/v2_05.jpg","6":"img/v2_06.jpg","7":"img/v3_07.jpg","8":"img/v2_08.jpg","9":"img/v2_09.jpg","10":"img/v2_10.jpg","11":"img/v2_11.jpg","12":"img/v2_12.jpg","13":"img/v2_13.jpg","14":"img/v2_14.jpg","15":"img/v2_15.jpg","16":"img/v2_16.jpg","17":"img/v2_17.jpg","18":"img/v2_18.jpg","19":"img/v2_19.jpg","20":"img/v2_20.jpg","21":"img/v2_21.jpg","22":"img/v2_22.jpg","23":"img/v2_23.jpg","24":"img/v2_24.jpg","25":"img/v2_25.jpg","26":"img/v2_26.jpg","27":"img/v2_27.jpg","28":"img/v2_28.jpg","29":"img/v2_29.jpg","30":"img/dc855af31e.jpg","31":"img/v2_31.jpg","32":"img/v2_32.jpg","33":"img/v2_33.jpg","34":"img/v2_34.jpg","35":"img/v2_35.jpg","36":"img/v2_36.jpg","37":"img/v2_37.jpg","38":"img/v2_38.jpg","39":"img/v2_39.jpg","40":"img/v2_40.jpg","41":"img/v2_41.jpg","42":"img/v2_42.jpg","43":"img/v2_43.jpg","44":"img/v2_44.jpg","45":"img/v2_45.jpg","46":"img/v2_46.jpg","47":"img/v2_47.jpg","48":"img/v2_48.jpg","49":"img/v2_49.jpg","50":"img/v2_50.jpg","51":"img/v2_51.jpg","52":"img/v2_52.jpg","53":"img/v2_53.jpg","54":"img/v2_54.jpg","55":"img/v2_55.jpg","56":"img/v2_56.jpg","57":"img/v2_57.jpg","58":"img/v2_58.jpg","59":"img/v2_59.jpg","60":"img/v2_60.jpg","61":"img/v2_61.jpg","62":"img/v2_62.jpg","63":"img/v2_63.jpg","64":"img/v2_64.jpg","65":"img/v3_65.jpg","66":"img/v2_66.jpg","68":"img/v2_68.jpg","67":"img/v2_67.jpg","69":"img/v2_69.jpg"};
 const PRODUCTS=[
 {num:1,id:'n01',fam:'Aromático Amadeirado',insp:'Chanel · Bleu de Chanel',orig:1050,price:100,stock:7,line:'Masculino',img:POSTERS['1']},
 {num:2,id:'n02',fam:'Ambarado Gourmand',insp:'Parfums de Marly · Althaïr',orig:1850,price:125,stock:5,line:'Masculino',img:POSTERS['2']},
@@ -343,7 +346,7 @@ const PRODUCTS=[
 {num:4,id:'n04',fam:'Amadeirado Elegante',insp:'Dior · Homme Parfum',orig:880,price:100,stock:0,line:'Masculino',img:POSTERS['4']},
 {num:5,id:'n05',fam:'Amadeirado Mineral',insp:"Hermès · Terre d'Hermès",orig:780,price:100,stock:2,line:'Masculino',img:POSTERS['5']},
 {num:6,id:'n06',fam:'Aromático Doce',insp:'Armani · Stronger With You Intensely',orig:620,price:100,stock:3,line:'Masculino',img:POSTERS['6']},
-{num:7,id:'n07',fam:'Cítrico Amadeirado',insp:'Louis Vuitton · Imagination',orig:2290,price:125,stock:5,line:'Masculino',img:POSTERS['7']},
+{num:7,id:'n07',fam:'Aromático Cítrico',insp:'Chanel · Allure Homme Sport',orig:1050,price:100,stock:0,line:'Masculino',img:POSTERS['7'],macer:1},
 {num:8,id:'n08',fam:'Aquático Amadeirado',insp:'Paco Rabanne · Invictus',orig:580,price:100,stock:5,line:'Masculino',img:POSTERS['8']},
 {num:9,id:'n09',fam:'Frutado Chipre',insp:'Creed · Aventus',orig:3100,price:125,stock:3,line:'Masculino',img:POSTERS['9']},
 {num:10,id:'n10',fam:'Frutado Amadeirado',insp:'Armaf · Club de Nuit Intense Man',orig:0,price:100,stock:3,line:'Masculino',img:POSTERS['10']},
@@ -391,22 +394,21 @@ const PRODUCTS=[
 {num:52,id:'n52',fam:'Âmbar Oriental',insp:'Orientica · Royal Amber',orig:500,price:100,stock:5,line:'Unissex',img:POSTERS['52']},
 {num:53,id:'n53',fam:'Aromático Especiado',insp:'Giorgio Armani · Stronger With You',orig:880,price:100,stock:0,line:'Masculino',img:POSTERS['53'],macer:1},
 {num:54,id:'n54',fam:'Floral Amadeirado',insp:'Givenchy · Irresistible',orig:950,price:100,stock:0,line:'Feminino',img:POSTERS['54'],macer:1},
-{num:55,id:'n55',fam:'Amadeirado Floral',insp:'Carolina Herrera · Cedar Chic',orig:1730,price:100,stock:0,line:'Unissex',img:POSTERS['55'],macer:1},
+{num:55,id:'n55',fam:'Amadeirado Floral',insp:'Carolina Herrera · Cedar Chic',orig:1730,price:125,stock:0,line:'Unissex',img:POSTERS['55'],macer:1},
 {num:56,id:'n56',fam:'Aromático Amadeirado',insp:'Hugo Boss · Boss Bottled Infinite',orig:790,price:100,stock:0,line:'Masculino',img:POSTERS['56'],macer:1},
 {num:57,id:'n57',fam:'Gourmand Floral',insp:'Lancôme · La Vie Est Belle',orig:800,price:100,stock:0,line:'Feminino',img:POSTERS['57'],macer:1},
-{num:58,id:'n58',fam:'Cítrico Amadeirado',insp:'Louis Vuitton · Imagination',orig:2290,price:125,stock:0,line:'Masculino',img:POSTERS['58'],macer:1},
+{num:58,id:'n58',fam:'Cítrico Amadeirado',insp:'Louis Vuitton · Imagination',orig:2290,price:125,stock:5,line:'Masculino',img:POSTERS['58']},
 {num:59,id:'n59',fam:'Floral Amendoado',insp:'Parfums de Marly · Valaya Exclusif',orig:3300,price:125,stock:0,line:'Feminino',img:POSTERS['59'],macer:1},
 {num:60,id:'n60',fam:'Gourmand Frutado',insp:'Burberry · Her Elixir',orig:1140,price:100,stock:0,line:'Feminino',img:POSTERS['60'],macer:1},
 {num:61,id:'n61',fam:'Frutado Âmbar',insp:'Xerjoff · Erba Pura',orig:2110,price:125,stock:0,line:'Unissex',img:POSTERS['61'],macer:1},
 {num:62,id:'n62',fam:'Amadeirado Floral',insp:'Sospiro · Vibrato',orig:2400,price:125,stock:0,line:'Unissex',img:POSTERS['62'],macer:1},
 {num:63,id:'n63',fam:'Floral Branco',insp:"Givenchy · L'Interdit Absolu",orig:0,price:100,stock:0,line:'Feminino',img:POSTERS['63'],macer:1},
 {num:64,id:'n64',fam:'Aromático Amadeirado',insp:'Jean Paul Gaultier · Le Beau',orig:770,price:100,stock:0,line:'Masculino',img:POSTERS['64'],macer:1},
-{num:65,id:'n65',fam:'Aromático Cítrico',insp:'Chanel · Allure Homme Sport',orig:1050,price:100,stock:0,line:'Masculino',img:POSTERS['65'],macer:1},
+{num:65,id:'n65',fam:'Aromático Aquático',insp:'Creed · Erolfa',orig:3100,price:125,stock:0,line:'Masculino',img:POSTERS['65'],macer:1,ready:'07/12'},
 {num:66,id:'n66',fam:'Âmbar Especiado',insp:'Creed · Centaurus',orig:3100,price:125,stock:0,line:'Masculino',img:POSTERS['66'],macer:1,ready:'07/12'},
 {num:67,id:'n67',fam:'Amadeirado Aromático',insp:'Creed · Himalaya',orig:3100,price:125,stock:0,line:'Masculino',img:POSTERS['67'],macer:1,ready:'07/12'},
 {num:68,id:'n68',fam:'Floral Oriental',insp:'Creed · Queen of Silk',orig:3100,price:125,stock:0,line:'Feminino',img:POSTERS['68'],macer:1,ready:'07/12'},
-{num:69,id:'n69',fam:'Floral Amadeirado',insp:'Tom Ford · Café Rose',orig:2400,price:125,stock:0,line:'Unissex',img:POSTERS['69'],macer:1,ready:'07/12'},
-{num:70,id:'n70',fam:'Aromático Aquático',insp:'Creed · Erolfa',orig:3100,price:125,stock:0,line:'Masculino',img:POSTERS['70'],macer:1,ready:'07/12'}
+{num:69,id:'n69',fam:'Floral Amadeirado',insp:'Tom Ford · Café Rose',orig:2400,price:125,stock:0,line:'Unissex',img:POSTERS['69'],macer:1,ready:'07/12'}
 ];
 
 var INSTAGRAM = "https://www.instagram.com/cougarparfum/";
@@ -476,9 +478,10 @@ function renderCart(){
 function openCart(){ $('#drawer').classList.add('show'); $('#scrim').classList.add('show'); }
 function closeCart(){ $('#drawer').classList.remove('show'); $('#scrim').classList.remove('show'); }
 function toast(m){ var t=$('#toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('show');},2200); }
-function showLbAt(i){ if(!shownList.length) return; lbIndex=(i+shownList.length)%shownList.length; var p=shownList[lbIndex]; $('#lbimg').src=p.img; $('#lbimg').alt='Cougar Parfum Nº '+pad(p.num); }
+function showLbAt(i){ if(!shownList.length) return; lbIndex=(i+shownList.length)%shownList.length; var p=shownList[lbIndex]; $('#lbimg').src=p.img; $('#lbimg').alt='Cougar Parfum Nº '+pad(p.num); $('#lbcount').textContent=(lbIndex+1)+' / '+shownList.length+'  ·  deslize ›'; }
 function openLb(id){ lbIndex=shownList.findIndex(function(p){return p.id===id;}); if(lbIndex<0) lbIndex=0; showLbAt(lbIndex); $('#lb').classList.add('show'); }
 function navLb(d){ showLbAt(lbIndex+d); }
+(function(){ var x0=null; var lb=document.getElementById('lb'); lb.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true}); lb.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>45) navLb(dx<0?1:-1); x0=null; }); })();
 function closeLb(){ $('#lb').classList.remove('show'); $('#lbimg').src=''; }
 
 document.addEventListener('click', function(e){
