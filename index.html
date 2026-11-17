@@ -263,7 +263,7 @@ footer .legal .gold{color:#c9a24b}
   <div class="sec-head">
     <div class="eyebrow">A Coleção</div>
     <h2>Cada fragrância, um número</h2>
-    <p>Do Nº 01 ao Nº 52 — clique em qualquer frasco para ver a pirâmide olfativa completa. O preço de um original equivalente aparece riscado; o seu, ao lado.</p>
+    <p>Do Nº 01 ao Nº <span id="maxnum">69</span> — clique em qualquer frasco para ver a pirâmide olfativa completa. O preço de um original equivalente aparece riscado; o seu, ao lado.</p>
   </div>
   <div class="filters" id="filters">
     <button data-f="todos" aria-pressed="true">Todos</button>
@@ -517,6 +517,8 @@ var _userScrolled=false;
 function _toTop(){ if(!_userScrolled){ window.scrollTo(0,0); } }
 _toTop(); window.addEventListener('load', _toTop); setTimeout(_toTop, 250);
 initAdmin(); renderGrid(); renderCart();
+
+try{ document.getElementById('maxnum').textContent=pad(Math.max.apply(null,PRODUCTS.map(function(p){return p.num;}))); }catch(e){}
 </script>
 </body>
 </html>
