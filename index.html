@@ -113,6 +113,7 @@ header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background
 .card .num{font-family:var(--serif); font-size:23px; font-weight:500; letter-spacing:.02em}
 .card .stk{font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint)}
 .card .stk.pre{color:var(--gold-deep)} .card .stk.low{color:var(--red)}
+.card .stk.ready{color:#c62828; font-weight:700; font-size:11px; letter-spacing:.1em}
 .card .fam{font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-top:6px}
 .card .insp{font-size:12px; color:var(--soft); margin-top:7px}
 .card .insp b{color:var(--ink); font-weight:500}
@@ -423,7 +424,7 @@ var ADMIN = hasEstoque();
 function initAdmin(){ if(ADMIN && !document.getElementById('fEsg')){ var b=document.createElement('button'); b.id='fEsg'; b.setAttribute('data-f','esgotado'); b.setAttribute('aria-pressed','false'); b.textContent='Esgotados'; var fb=document.getElementById('filters'); if(fb) fb.appendChild(b); } }
 window.addEventListener('hashchange', function(){ location.reload(); });
 function stockTag(p){
-  if(p.macer) return '<span class="stk pre">Pronto em '+(p.ready||'28/11')+'</span>';
+  if(p.macer) return '<span class="stk ready">Pronto em '+(p.ready||'28/11')+'</span>';
   if(p.sold) return '<span class="stk pre">Esgotado</span>';
   if(p.stock<=0) return '<span class="stk pre">Pré-venda</span>';
   if(p.stock<=6) return '<span class="stk low">Últimas '+p.stock+'</span>';
@@ -446,10 +447,12 @@ function renderGrid(){
   if(filter==='esgotado'){ var le=PRODUCTS.filter(function(p){ return ADMIN && p.sold; }); shownList=le; $('#grid').innerHTML=le.map(cardHtml).join(''); return; }
   if(filter==='maceracao'){ var lm=PRODUCTS.filter(function(p){ return p.macer; }); shownList=lm; $('#grid').innerHTML=lm.map(cardHtml).join(''); return; }
   if(filter==='nicho'){
-    var nicho=PRODUCTS.filter(function(p){ return !p.sold && !p.macer && p.price>=125; });
-    var groups=[['Masculino','Masculino'],['Feminino','Feminino'],['Unissex','Unissex']];
+    var nicho=PRODUCTS.filter(function(p){ return !p.sold && p.orig>1500; });
+    var brandOf=function(p){ return p.insp.split(' · ')[0]; };
+    var order=['Tom Ford','Creed','Parfums de Marly','Nishane'];
+    nicho.forEach(function(p){ var b=brandOf(p); if(order.indexOf(b)<0) order.push(b); });
     var html=''; shownList=[];
-    groups.forEach(function(g){ var it=nicho.filter(function(p){return p.line===g[1];}); if(it.length){ html+='<h3 class="grouphd">'+g[0]+'</h3>'+it.map(cardHtml).join(''); shownList=shownList.concat(it); } });
+    order.forEach(function(b){ var it=nicho.filter(function(p){return brandOf(p)===b;}); it.sort(function(x,y){ return (x.macer?1:0)-(y.macer?1:0) || x.num-y.num; }); if(it.length){ html+='<h3 class="grouphd">'+b+'</h3>'+it.map(cardHtml).join(''); shownList=shownList.concat(it); } });
     $('#grid').innerHTML=html; return;
   }
   var list=PRODUCTS.filter(function(p){ return !p.sold && !p.macer && (filter==='todos' || p.line===filter); });
