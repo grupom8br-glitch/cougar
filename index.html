@@ -134,12 +134,10 @@ header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background
 .lb img{width:min(600px,92vw,calc(86vh * 0.8)); height:auto; aspect-ratio:4/5; object-fit:contain; box-shadow:0 30px 90px rgba(0,0,0,.5)}
 .lbcount{position:absolute; bottom:18px; left:50%; transform:translateX(-50%); color:#fff; font-size:13px; letter-spacing:.18em; background:rgba(0,0,0,.45); padding:6px 14px; border-radius:20px; z-index:2; white-space:nowrap}
 .lbx{position:absolute; top:16px; right:22px; font-size:30px; line-height:1; color:#fff; background:none; border:0; z-index:2}
-.lbnav{position:absolute; top:50%; transform:translateY(-50%); width:62px; height:62px; border-radius:50%; background:#b8933f; border:2px solid #fff; color:#fff; font-size:38px; font-weight:700; line-height:1; display:flex; align-items:center; justify-content:center; transition:.2s; z-index:2; box-shadow:0 6px 24px rgba(0,0,0,.55); cursor:pointer; padding-bottom:4px}
-.lbnav:hover{background:#d4ad55; transform:translateY(-50%) scale(1.08)}
-.lbprev{left:24px} .lbnext{right:24px}
-@keyframes lbpulse{0%,100%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(212,173,85,.7)}50%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 12px rgba(212,173,85,0)}}
-.lbnext{animation:lbpulse 1.8s ease-in-out 3}
-@media(max-width:560px){ .lbnav{width:50px; height:50px; font-size:30px} .lbprev{left:8px} .lbnext{right:8px} }
+.lbnav{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.94); border:0; color:#1a1712; font-family:var(--serif); font-size:26px; line-height:1; display:flex; align-items:center; justify-content:center; transition:.2s; z-index:2; box-shadow:0 2px 12px rgba(0,0,0,.35); cursor:pointer; padding-bottom:3px}
+.lbnav:hover{background:#fff; color:var(--gold-deep)}
+.lbprev{left:22px} .lbnext{right:22px}
+@media(max-width:560px){ .lbnav{width:36px; height:36px; font-size:22px} .lbprev{left:6px} .lbnext{right:6px} }
 
 .casa{margin-top:clamp(52px,8vw,100px); background:var(--cream); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
 .casa .wrap{padding-block:clamp(52px,8vw,104px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,88px); align-items:center}
