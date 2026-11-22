@@ -226,6 +226,27 @@ footer .legal .gold{color:#c9a24b}
 .hero .herocopy h1 em,.casa .quote,footer .tag{font-style:normal}
 .hero .herocopy h1{font-weight:500; font-size:clamp(34px,5vw,64px); line-height:1.08; letter-spacing:-.025em}
 .collection .sec-head h2,.casa h2{font-weight:500; line-height:1.12; letter-spacing:-.02em}
+
+/* Concentração em fundo branco */
+.herocopy{background:var(--paper); color:var(--ink); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.herocopy .eyebrow{color:var(--gold-deep)}
+.herocopy h1{color:var(--ink)}
+.herocopy h1 em{color:var(--gold-deep)}
+.herocopy .lead{color:var(--soft); max-width:52ch}
+.herocopy .perks li{color:var(--soft)}
+.herocopy .perks b{color:var(--ink)}
+.herocopy .hero-btn{background:var(--ink); color:#fff; border-color:var(--ink)}
+.herocopy .hero-btn:hover{background:transparent; color:var(--ink); border-color:var(--ink)}
+.herocopy .btn-text.light{color:var(--ink); border-color:var(--ink)}
+.herocopy .btn-text.light:hover{color:var(--gold-deep); border-color:var(--gold-deep)}
+.conc{margin:clamp(28px,4vw,48px) auto 0; max-width:1100px}
+.conc img{display:block; width:100%; height:auto}
+.conc-grid{display:none}
+.conc figcaption{margin-top:14px; font-size:13px; color:var(--soft)}
+@media (max-width:640px){
+  .conc-full{display:none !important}
+  .conc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px 6px}
+}
 </style>
 </head>
 <body>
@@ -274,7 +295,12 @@ footer .legal .gold{color:#c9a24b}
   <div class="herocopy"><div class="wrap">
     <div class="eyebrow">Exclusividade e alta concentração</div>
     <h1>A concentração que você merece para <em>deixar seu rastro</em>.</h1>
-    <p class="lead">Um perfume comum tem de 15% a 20% de essência. Os nossos têm de 30 a 40% de concentração de essência, até o dobro. Na prática: mais horas na pele e um perfume que as pessoas sentem quando você passa.</p>
+    <p class="lead">Um perfume comum (Eau de Parfum) tem de 15% a 25% de essência. Os nossos têm de 30 a 40% de concentração de essência, até o dobro. Na prática: mais horas na pele e um perfume que as pessoas sentem quando você passa.</p>
+    <figure class="conc">
+      <img class="conc-full" src="img/concentracao.jpg" alt="Comparativo de concentração: Colônia 2% a 5%, Eau de Toilette 5% a 15%, Eau de Parfum 15% a 25%, Extrait de Parfum Cougar Parfum 30% a 40%">
+      <div class="conc-grid"><img src="img/concentracao-1.jpg" alt="Colônia: 2% a 5%"><img src="img/concentracao-2.jpg" alt="Eau de Toilette: 5% a 15%"><img src="img/concentracao-3.jpg" alt="Eau de Parfum: 15% a 25%"><img src="img/concentracao-4.jpg" alt="Extrait de Parfum Cougar Parfum: 30% a 40%"></div>
+      <figcaption>Quanto mais essência, mais o perfume dura na pele e mais ele é sentido por quem está perto.</figcaption>
+    </figure>
     <ul class="perks"><li><b>Até 2x</b>mais essência</li><li><b>Fixação</b>prolongada</li><li><b>Notado</b>por onde passa</li></ul>
     <div class="cta"><a href="#colecao" class="btn hero-btn">Ver a coleção</a><a href="#casa" class="btn-text light">Conheça nossa história</a></div>
   </div></div>
