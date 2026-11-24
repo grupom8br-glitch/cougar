@@ -569,7 +569,8 @@ function renderGrid(){
     order.forEach(function(b){ var it=nicho.filter(function(p){return brandOf(p)===b;}); it.sort(function(x,y){ return (x.macer?1:0)-(y.macer?1:0) || x.num-y.num; }); if(it.length){ html+='<h3 class="grouphd">'+b+'</h3>'+it.map(cardHtml).join(''); shownList=shownList.concat(it); } });
     $('#grid').innerHTML=html; return;
   }
-  var list=PRODUCTS.filter(function(p){ return !p.sold && (filter==='todos' ? true : (!p.macer && p.line===filter)); });
+  var list=PRODUCTS.filter(function(p){ return !p.sold && (filter==='todos' ? true : (p.line===filter || (p.line==='Unissex' && (filter==='Masculino' || filter==='Feminino')))); });
+  if(filter!=='todos') list.sort(function(x,y){ return (x.macer?1:0)-(y.macer?1:0) || x.num-y.num; });
   shownList=list;
   var BAN={'Masculino':['img/capa-masc-v2.jpg','Linha masculina Cougar Parfum'],'Feminino':['img/capa-fem.jpg','Linha feminina Cougar Parfum']}[filter];
   $('#grid').innerHTML=(BAN?'<div class="linebanner"><img src="'+BAN[0]+'" alt="'+BAN[1]+'" loading="lazy"></div>':'')+list.map(cardHtml).join('');
