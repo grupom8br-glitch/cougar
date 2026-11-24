@@ -268,7 +268,7 @@ footer .legal .gold{color:#c9a24b}
 .gintro h3{margin:0; font-size:20px; font-weight:600}
 .gintro p{margin:6px 0 0; color:var(--soft); font-size:14px; line-height:1.55; max-width:70ch}
 .gintro .gquem b{color:var(--ink); font-weight:600}
-.qz{position:fixed; inset:0; z-index:200; background:rgba(15,12,8,.55); display:none; align-items:center; justify-content:center; padding:16px}
+.qz{position:fixed; inset:0; z-index:90; background:rgba(15,12,8,.55); display:none; align-items:center; justify-content:center; padding:16px}
 .qz.show{display:flex}
 .qzbox{position:relative; background:var(--paper); width:min(720px,100%); max-height:92vh; overflow:auto; padding:30px 26px 26px; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif}
 .qzx{position:absolute; top:8px; right:12px; background:none; border:0; font-size:26px; color:var(--soft)}
@@ -277,7 +277,9 @@ footer .legal .gold{color:#c9a24b}
 .qzopts{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .qzo{font:inherit; font-size:15px; text-align:left; background:var(--paper); border:1px solid var(--line); padding:14px 16px; color:var(--ink)}
 .qzo:hover{border-color:var(--ink)}
-.qzsub{color:var(--soft); font-size:14px; margin:-8px 0 16px}
+.qzsub{color:var(--soft); font-size:14px; margin:-8px 0 12px}
+.qzaviso{background:#f7f5f1; border-left:2px solid var(--gold-deep); padding:10px 12px; font-size:13.5px; color:var(--ink); margin:0 0 12px}
+.qzdica{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin:0 0 10px}
 .qzres{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
 .qzres .card .insp,.qzres .card .price small{display:none}
 .qzfoot{display:flex; gap:22px; justify-content:center; margin-top:18px}
@@ -541,7 +543,7 @@ function cardHtml(p){
 }
 
 var GRUPOS={
- frescos:{t:'Frescos',ic:'🍋',cheiro:'Limão, mar, banho tomado',quando:'Dia, calor, trabalho, academia',txt:'Leves e limpos, com notas cítricas e aquáticas. São os mais fáceis de usar: não incomodam ninguém e combinam com o dia a dia e o calor de Floripa.',quem:'quem gosta de cheiro de limpeza e quer um perfume para todo dia.'},
+ frescos:{t:'Frescos',ic:'🍋',cheiro:'Limão, mar, banho tomado',quando:'Dia, calor, trabalho, academia',txt:'Leves e limpos, com notas cítricas e aquáticas. São os mais fáceis de usar: não incomodam ninguém e combinam com o dia a dia e com dias quentes.',quem:'quem gosta de cheiro de limpeza e quer um perfume para todo dia.'},
  aromaticos:{t:'Aromáticos',ic:'🌿',cheiro:'Lavanda, ervas, barbearia',quando:'Versátil, qualquer hora',txt:'Ervas, lavanda e um toque de frescor com fundo macio. É o cheiro clássico de homem bem-arrumado, que funciona do escritório ao jantar.',quem:'quem quer um coringa elegante, que agrada em qualquer situação.'},
  amadeirados:{t:'Amadeirados',ic:'🪵',cheiro:'Madeira, couro, elegância',quando:'Escritório, reuniões, noite',txt:'Madeiras nobres, couro e íris. Passam presença e sofisticação sem ser doces. Dão a sensação de alguém seguro e bem-sucedido.',quem:'quem quer transmitir elegância e autoridade.'},
  florais:{t:'Florais',ic:'🌸',cheiro:'Flores, delicado, feminino',quando:'Dia a dia, encontros, eventos',txt:'Rosa, jasmim, flor de laranjeira e frutas. Vão do delicado ao sedutor e são a família preferida de quem quer um perfume feminino e marcante.',quem:'quem ama perfume de flor e quer ser lembrada pelo cheiro.'},
@@ -597,6 +599,7 @@ function closeLb(){ $('#lb').classList.remove('show'); $('#lbimg').src=''; }
 
 document.addEventListener('click', function(e){
   var z=e.target.closest('[data-zoom]'); if(z){ openLb(z.getAttribute('data-zoom')); return; }
+  var add=e.target.closest('[data-add]'); if(add && add.closest('#qz')){ document.getElementById('qz').classList.remove('show'); }
   var add=e.target.closest('[data-add]'); if(add){ var id=add.getAttribute('data-add'); var p=byId(id); if(p.sold){ return; } cart[id]=(cart[id]||0)+1; renderCart(); toast('<b>Nº '+pad(p.num)+'</b> na sacola'); openCart(); return; }
   var inc=e.target.closest('[data-inc]'); if(inc){ var i2=inc.getAttribute('data-inc'); var p2=byId(i2); if(p2.stock<=0||cart[i2]<p2.stock) cart[i2]++; else toast('Só temos <b>'+p2.stock+'</b> em estoque'); renderCart(); return; }
   var dec=e.target.closest('[data-dec]'); if(dec){ var i3=dec.getAttribute('data-dec'); cart[i3]--; if(cart[i3]<=0) delete cart[i3]; renderCart(); return; }
@@ -619,12 +622,15 @@ function quizStep(){ var k=qzA.length, Q=QZ[k];
 function quizAnswer(b){ qzA.push(b.getAttribute('data-q')); if(qzA.length<QZ.length) quizStep(); else quizResult(); }
 function quizResult(){ var gen=qzA[0], when=qzA[1], fam=qzA[2];
   var W={dia:{frescos:2,aromaticos:2,amadeirados:1,florais:1},noite:{doces:2,intensos:2,amadeirados:1,florais:1},tudo:{aromaticos:2,amadeirados:2,florais:2,frescos:1,doces:1}}[when];
+  var VIZ={frescos:{aromaticos:3,florais:2},aromaticos:{frescos:3,amadeirados:2},amadeirados:{aromaticos:3,intensos:2},florais:{doces:2,frescos:2},doces:{florais:2,intensos:3},intensos:{doces:3,amadeirados:2}}[fam];
   var line={m:'Masculino',f:'Feminino'}[gen];
   var pool=PRODUCTS.filter(function(p){ return !p.sold && p.grp && (!line || p.line===line || p.line==='Unissex'); });
-  pool.forEach(function(p){ p._s=(p.grp===fam?5:0)+(W[p.grp]||0)+(p.stock>0&&!p.macer?1.5:0)+(p.macer?-1:0)+(gen==='u'&&p.line==='Unissex'?1:0); });
+  var temFam=pool.some(function(p){ return p.grp===fam; });
+  pool.forEach(function(p){ p._s=(p.grp===fam?6:(VIZ[p.grp]||0))+(W[p.grp]||0)+(p.stock>0&&!p.macer?1.5:0)+(p.macer?-1:0)+(gen==='u'&&p.line==='Unissex'?1:0); });
   pool.sort(function(a,b){ return b._s-a._s || b.stock-a.stock || a.num-b.num; });
   var top=pool.slice(0,3); shownList=top; var G=GRUPOS[fam];
-  document.getElementById('qzbody').innerHTML='<div class="qzstep">Seu resultado</div><h3>Seu estilo: '+G.ic+' '+G.t+'</h3><p class="qzsub">'+G.txt+'</p><div class="qzres">'+top.map(cardHtml).join('')+'</div><div class="qzfoot"><button class="btn-text" data-grp="'+fam+'" id="qzall">Ver todos os '+G.t.toLowerCase()+'</button> <button class="btn-text" id="qzagain">Refazer o teste</button></div>'; }
+  var aviso=temFam?'':'<p class="qzaviso">'+(line==='Feminino'?'Na linha feminina':'Na linha masculina')+' ainda não temos perfumes '+G.t.toLowerCase()+'. Separamos os mais próximos desse estilo:</p>';
+  document.getElementById('qzbody').innerHTML='<div class="qzstep">Seu resultado</div><h3>Seu estilo: '+G.ic+' '+G.t+'</h3><p class="qzsub">'+G.txt+'</p>'+aviso+'<p class="qzdica">Toque na imagem para ver a pirâmide olfativa completa.</p><div class="qzres">'+top.map(function(p){ return cardHtml(p).replace('<div class="fam">','<div class="fam">'+GRUPOS[p.grp].ic+' '+GRUPOS[p.grp].t+' · '); }).join('')+'</div><div class="qzfoot"><button class="btn-text" data-grp="'+fam+'" id="qzall">Ver todos os '+G.t.toLowerCase()+'</button> <button class="btn-text" id="qzagain">Refazer o teste</button></div>'; }
 document.getElementById('quizBtn').addEventListener('click',quizOpen);
 document.getElementById('qzx').addEventListener('click',quizClose);
 document.getElementById('qz').addEventListener('click',function(e){ if(e.target.id==='qz') quizClose(); if(e.target.id==='qzagain') quizOpen(); if(e.target.id==='qzall') quizClose(); });
