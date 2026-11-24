@@ -247,6 +247,49 @@ footer .legal .gold{color:#c9a24b}
   .conc-full{display:none !important}
   .conc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px 6px}
 }
+
+/* Guia de famílias + teste */
+.guia{margin:0 auto 34px; max-width:1100px}
+.guia-hd{text-align:center; margin-bottom:20px}
+.guia-hd h3{font-size:clamp(22px,2.6vw,30px); font-weight:500; letter-spacing:-.015em; margin:8px 0 0}
+.guia-hd p{color:var(--soft); margin:8px auto 0; max-width:52ch; font-size:14px}
+.guia-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.gcard{display:flex; flex-direction:column; align-items:flex-start; gap:3px; text-align:left; background:var(--paper); border:1px solid var(--line); padding:16px 16px 14px; font:inherit; color:var(--ink); transition:border-color .2s, box-shadow .2s}
+.gcard:hover,.gcard.on{border-color:var(--ink); box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.gcard .gic{font-size:22px; line-height:1}
+.gcard .gt{font-size:17px; font-weight:600; margin-top:6px}
+.gcard .gc{font-size:13px; color:var(--ink)}
+.gcard .gq{font-size:12px; color:var(--soft)}
+.gcard .gn{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-deep); margin-top:6px}
+.guia-quiz{text-align:center; margin-top:18px}
+.guia-quiz .btn{background:var(--ink); color:#fff; border:1px solid var(--ink); padding:13px 26px; letter-spacing:.08em; text-transform:uppercase; font-size:11.5px}
+.gintro{grid-column:1/-1; display:flex; gap:16px; align-items:flex-start; background:#f7f5f1; border:1px solid var(--line); padding:20px 22px; margin-bottom:6px}
+.gintro .gic{font-size:30px; line-height:1}
+.gintro h3{margin:0; font-size:20px; font-weight:600}
+.gintro p{margin:6px 0 0; color:var(--soft); font-size:14px; line-height:1.55; max-width:70ch}
+.gintro .gquem b{color:var(--ink); font-weight:600}
+.qz{position:fixed; inset:0; z-index:200; background:rgba(15,12,8,.55); display:none; align-items:center; justify-content:center; padding:16px}
+.qz.show{display:flex}
+.qzbox{position:relative; background:var(--paper); width:min(720px,100%); max-height:92vh; overflow:auto; padding:30px 26px 26px; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif}
+.qzx{position:absolute; top:8px; right:12px; background:none; border:0; font-size:26px; color:var(--soft)}
+.qzstep{font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-deep); font-weight:600}
+.qzbox h3{font-size:clamp(20px,2.6vw,26px); font-weight:500; margin:8px 0 18px; letter-spacing:-.01em}
+.qzopts{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.qzo{font:inherit; font-size:15px; text-align:left; background:var(--paper); border:1px solid var(--line); padding:14px 16px; color:var(--ink)}
+.qzo:hover{border-color:var(--ink)}
+.qzsub{color:var(--soft); font-size:14px; margin:-8px 0 16px}
+.qzres{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.qzres .card .insp,.qzres .card .price small{display:none}
+.qzfoot{display:flex; gap:22px; justify-content:center; margin-top:18px}
+.qzfoot .btn-text{background:none; border:0; border-bottom:1px solid var(--ink); color:var(--ink); padding:0 0 3px; font:inherit; font-size:11px; letter-spacing:.14em; text-transform:uppercase}
+@media (max-width:640px){
+  .guia-grid{grid-template-columns:1fr 1fr; gap:8px}
+  .gcard{padding:12px}
+  .gcard .gt{font-size:15px}
+  .qzopts{grid-template-columns:1fr}
+  .qzres{grid-template-columns:1fr 1fr}
+  .qzres .card:nth-child(3){display:none}
+}
 </style>
 </head>
 <body>
@@ -311,6 +354,11 @@ footer .legal .gold{color:#c9a24b}
     <div class="eyebrow">A Coleção</div>
     <h2>Cada fragrância, um número</h2>
     <p>Do Nº 01 ao Nº <span id="maxnum">69</span> — clique em qualquer frasco para ver a pirâmide olfativa completa. O preço de um original equivalente aparece riscado; o seu, ao lado.</p>
+  </div>
+  <div class="guia" id="guia">
+    <div class="guia-hd"><div class="eyebrow">Encontre seu perfume</div><h3>Escolha pelo estilo de cheiro</h3><p>Não sabe por onde começar? Toque num estilo e veja só os perfumes dele, ou faça o teste rápido.</p></div>
+    <div class="guia-grid" id="guiaGrid"></div>
+    <div class="guia-quiz"><button class="btn" id="quizBtn">Fazer o teste · 30 segundos</button></div>
   </div>
   <div class="filters" id="filters">
     <button data-f="todos" aria-pressed="true">Todos</button>
@@ -380,6 +428,7 @@ footer .legal .gold{color:#c9a24b}
   <p class="mnote">Vai abrir o WhatsApp com seu pedido já escrito — é só tocar em enviar. 💬</p>
 </div></div>
 
+<div class="qz" id="qz" role="dialog" aria-modal="true" aria-label="Teste: encontre seu perfume"><div class="qzbox"><button class="qzx" id="qzx" aria-label="Fechar">×</button><div id="qzbody"></div></div></div>
 <div id="toast"></div>
 
 <script>
@@ -490,8 +539,24 @@ function cardHtml(p){
       '<button class="add'+(pre?' pre':'')+'"'+(p.sold?' disabled':'')+' data-add="'+p.id+'">'+(p.sold?'Esgotado':(pre?'Reservar':'Adicionar'))+'</button>'+
     '</div></article>';
 }
+
+var GRUPOS={
+ frescos:{t:'Frescos',ic:'🍋',cheiro:'Limão, mar, banho tomado',quando:'Dia, calor, trabalho, academia',txt:'Leves e limpos, com notas cítricas e aquáticas. São os mais fáceis de usar: não incomodam ninguém e combinam com o dia a dia e o calor de Floripa.',quem:'quem gosta de cheiro de limpeza e quer um perfume para todo dia.'},
+ aromaticos:{t:'Aromáticos',ic:'🌿',cheiro:'Lavanda, ervas, barbearia',quando:'Versátil, qualquer hora',txt:'Ervas, lavanda e um toque de frescor com fundo macio. É o cheiro clássico de homem bem-arrumado, que funciona do escritório ao jantar.',quem:'quem quer um coringa elegante, que agrada em qualquer situação.'},
+ amadeirados:{t:'Amadeirados',ic:'🪵',cheiro:'Madeira, couro, elegância',quando:'Escritório, reuniões, noite',txt:'Madeiras nobres, couro e íris. Passam presença e sofisticação sem ser doces. Dão a sensação de alguém seguro e bem-sucedido.',quem:'quem quer transmitir elegância e autoridade.'},
+ florais:{t:'Florais',ic:'🌸',cheiro:'Flores, delicado, feminino',quando:'Dia a dia, encontros, eventos',txt:'Rosa, jasmim, flor de laranjeira e frutas. Vão do delicado ao sedutor e são a família preferida de quem quer um perfume feminino e marcante.',quem:'quem ama perfume de flor e quer ser lembrada pelo cheiro.'},
+ doces:{t:'Doces',ic:'🍯',cheiro:'Baunilha, caramelo, cereja',quando:'Noite, frio, sedução',txt:'Baunilha, mel, caramelo e frutas maduras. São os que mais recebem elogio de perto e deixam o rastro mais memorável.',quem:'quem quer chamar atenção e receber elogio.'},
+ intensos:{t:'Intensos',ic:'🔥',cheiro:'Especiarias, âmbar, oud',quando:'Noite, inverno, ocasiões marcantes',txt:'Especiarias, âmbar, oud e tabaco. Têm projeção forte e duram muito: poucos borrifos bastam e ninguém esquece.',quem:'quem gosta de perfume marcante e não tem medo de ser notado.'}
+};
+var GRUPO_DE={frescos:[7,8,11,15,20,58,65],aromaticos:[16,17,19,25,56,64],amadeirados:[1,3,4,5,9,10,12,23,55,62,67],florais:[28,29,30,32,34,35,36,39,41,42,43,44,45,50,54,59,63,68,69],doces:[2,6,13,21,24,33,37,38,40,46,47,48,53,57,60,61],intensos:[14,18,22,26,27,31,49,51,52,66]};
+Object.keys(GRUPO_DE).forEach(function(g){ GRUPO_DE[g].forEach(function(n){ var p=PRODUCTS.find(function(x){return x.num===n;}); if(p) p.grp=g; }); });
+function renderGuia(){ var el=document.getElementById('guiaGrid'); if(!el) return;
+  el.innerHTML=Object.keys(GRUPOS).map(function(k){ var g=GRUPOS[k]; var n=PRODUCTS.filter(function(p){return p.grp===k && !p.sold;}).length;
+    return '<button class="gcard" data-grp="'+k+'"><span class="gic">'+g.ic+'</span><span class="gt">'+g.t+'</span><span class="gc">'+g.cheiro+'</span><span class="gq">'+g.quando+'</span><span class="gn">'+n+' perfumes</span></button>'; }).join(''); }
 function renderGrid(){
   if(filter==='esgotado'){ var le=PRODUCTS.filter(function(p){ return ADMIN && p.sold; }); shownList=le; $('#grid').innerHTML=le.map(cardHtml).join(''); return; }
+  if(filter.indexOf('g:')===0){ var gk=filter.slice(2), G=GRUPOS[gk]; var lg=PRODUCTS.filter(function(p){ return !p.sold && p.grp===gk; }); lg.sort(function(x,y){ return (x.macer?1:0)-(y.macer?1:0) || ((y.stock>0)-(x.stock>0)) || x.num-y.num; }); shownList=lg;
+    $('#grid').innerHTML='<div class="gintro"><span class="gic">'+G.ic+'</span><div><h3>'+G.t+'</h3><p>'+G.txt+'</p><p class="gquem"><b>Combina com</b> '+G.quem+' <b>Melhor para:</b> '+G.quando.toLowerCase()+'.</p></div></div>'+lg.map(cardHtml).join(''); return; }
   if(filter==='maceracao'){ var lm=PRODUCTS.filter(function(p){ return p.macer; }); shownList=lm; $('#grid').innerHTML=lm.map(cardHtml).join(''); return; }
   if(filter==='nicho'){
     var nicho=PRODUCTS.filter(function(p){ return !p.sold && p.orig>1500; });
@@ -536,8 +601,34 @@ document.addEventListener('click', function(e){
   var inc=e.target.closest('[data-inc]'); if(inc){ var i2=inc.getAttribute('data-inc'); var p2=byId(i2); if(p2.stock<=0||cart[i2]<p2.stock) cart[i2]++; else toast('Só temos <b>'+p2.stock+'</b> em estoque'); renderCart(); return; }
   var dec=e.target.closest('[data-dec]'); if(dec){ var i3=dec.getAttribute('data-dec'); cart[i3]--; if(cart[i3]<=0) delete cart[i3]; renderCart(); return; }
   var rm=e.target.closest('[data-rm]'); if(rm){ delete cart[rm.getAttribute('data-rm')]; renderCart(); return; }
-  var f=e.target.closest('#filters button'); if(f){ filter=f.getAttribute('data-f'); [].forEach.call(document.querySelectorAll('#filters button'),function(b){b.setAttribute('aria-pressed',b===f?'true':'false');}); renderGrid(); return; }
+  var gc=e.target.closest('[data-grp]'); if(gc){ filter='g:'+gc.getAttribute('data-grp'); [].forEach.call(document.querySelectorAll('#filters button'),function(b){b.setAttribute('aria-pressed','false');}); [].forEach.call(document.querySelectorAll('.gcard'),function(b){b.classList.toggle('on',b===gc);}); renderGrid(); var gr=document.getElementById('grid'); if(gr) window.scrollTo({top:gr.getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'}); return; }
+  var qo=e.target.closest('[data-q]'); if(qo){ quizAnswer(qo); return; }
+  var f=e.target.closest('#filters button'); if(f){ filter=f.getAttribute('data-f'); [].forEach.call(document.querySelectorAll('.gcard'),function(b){b.classList.remove('on');}); [].forEach.call(document.querySelectorAll('#filters button'),function(b){b.setAttribute('aria-pressed',b===f?'true':'false');}); renderGrid(); return; }
 });
+
+var QZ=[
+ {q:'Para quem é o perfume?',o:[['Para mim (masculino)','m'],['Para mim (feminino)','f'],['Tanto faz / unissex','u']]},
+ {q:'Quando você mais vai usar?',o:[['Dia a dia, trabalho, calor','dia'],['Noite, encontros, festas','noite'],['Em qualquer ocasião','tudo']]},
+ {q:'Qual cheiro mais te atrai?',o:[['Limpo e fresco 🍋','frescos'],['Ervas e lavanda 🌿','aromaticos'],['Madeira e couro 🪵','amadeirados'],['Flores 🌸','florais'],['Doce e envolvente 🍯','doces'],['Forte e marcante 🔥','intensos']]}
+];
+var qzA=[];
+function quizOpen(){ qzA=[]; quizStep(); document.getElementById('qz').classList.add('show'); }
+function quizClose(){ document.getElementById('qz').classList.remove('show'); }
+function quizStep(){ var k=qzA.length, Q=QZ[k];
+  document.getElementById('qzbody').innerHTML='<div class="qzstep">Pergunta '+(k+1)+' de '+QZ.length+'</div><h3>'+Q.q+'</h3><div class="qzopts">'+Q.o.map(function(o){return '<button class="qzo" data-q="'+o[1]+'">'+o[0]+'</button>';}).join('')+'</div>'; }
+function quizAnswer(b){ qzA.push(b.getAttribute('data-q')); if(qzA.length<QZ.length) quizStep(); else quizResult(); }
+function quizResult(){ var gen=qzA[0], when=qzA[1], fam=qzA[2];
+  var W={dia:{frescos:2,aromaticos:2,amadeirados:1,florais:1},noite:{doces:2,intensos:2,amadeirados:1,florais:1},tudo:{aromaticos:2,amadeirados:2,florais:2,frescos:1,doces:1}}[when];
+  var line={m:'Masculino',f:'Feminino'}[gen];
+  var pool=PRODUCTS.filter(function(p){ return !p.sold && p.grp && (!line || p.line===line || p.line==='Unissex'); });
+  pool.forEach(function(p){ p._s=(p.grp===fam?5:0)+(W[p.grp]||0)+(p.stock>0&&!p.macer?1.5:0)+(p.macer?-1:0)+(gen==='u'&&p.line==='Unissex'?1:0); });
+  pool.sort(function(a,b){ return b._s-a._s || b.stock-a.stock || a.num-b.num; });
+  var top=pool.slice(0,3); shownList=top; var G=GRUPOS[fam];
+  document.getElementById('qzbody').innerHTML='<div class="qzstep">Seu resultado</div><h3>Seu estilo: '+G.ic+' '+G.t+'</h3><p class="qzsub">'+G.txt+'</p><div class="qzres">'+top.map(cardHtml).join('')+'</div><div class="qzfoot"><button class="btn-text" data-grp="'+fam+'" id="qzall">Ver todos os '+G.t.toLowerCase()+'</button> <button class="btn-text" id="qzagain">Refazer o teste</button></div>'; }
+document.getElementById('quizBtn').addEventListener('click',quizOpen);
+document.getElementById('qzx').addEventListener('click',quizClose);
+document.getElementById('qz').addEventListener('click',function(e){ if(e.target.id==='qz') quizClose(); if(e.target.id==='qzagain') quizOpen(); if(e.target.id==='qzall') quizClose(); });
+renderGuia();
 $('#bagBtn').addEventListener('click', openCart);
 $('#closeCart').addEventListener('click', closeCart);
 $('#scrim').addEventListener('click', closeCart);
