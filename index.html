@@ -292,6 +292,20 @@ footer .legal .gold{color:#c9a24b}
   .qzres{grid-template-columns:1fr 1fr}
   .qzres .card:nth-child(3){display:none}
 }
+
+.admp{position:fixed; inset:0; z-index:300; background:var(--paper); overflow:auto; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif}
+.admbox{max-width:900px; margin:0 auto; padding:28px clamp(16px,4vw,40px) 60px}
+.admhd{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:8px}
+.admhd h2{font-size:clamp(24px,3vw,32px); font-weight:500; margin:6px 0 4px; letter-spacing:-.015em}
+.admhd p{margin:0; color:var(--soft); font-size:14px}
+.admx{white-space:nowrap; font-size:11px; letter-spacing:.12em; text-transform:uppercase; border:1px solid var(--ink); padding:10px 14px; color:var(--ink)}
+.admt{width:100%; border-collapse:collapse; font-size:14px}
+.admt th{text-align:left; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 8px; border-bottom:1px solid var(--line)}
+.admt td{padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:middle}
+.admt td b{white-space:nowrap}
+.admt td small{display:block; color:var(--soft); font-size:12px; margin-top:2px}
+.admt img{width:52px; height:65px; object-fit:cover; display:block}
+@media (max-width:640px){ .admt th:nth-child(4),.admt td:nth-child(4){display:none} .admt{font-size:13px} }
 </style>
 </head>
 <body>
@@ -522,6 +536,13 @@ function hasEstoque(){ return (location.hash||'').toLowerCase().indexOf('estoque
 var ADMIN = hasEstoque();
 function initAdmin(){ if(ADMIN && !document.getElementById('fEsg')){ var b=document.createElement('button'); b.id='fEsg'; b.setAttribute('data-f','esgotado'); b.setAttribute('aria-pressed','false'); b.textContent='Esgotados'; var fb=document.getElementById('filters'); if(fb) fb.appendChild(b); } }
 window.addEventListener('hashchange', function(){ location.reload(); });
+function renderAdminPanel(){ if(!ADMIN) return;
+  var L=PRODUCTS.filter(function(p){return p.sold;}).sort(function(a,b){return a.num-b.num;});
+  var rows=L.map(function(p){ return '<tr><td><img src="'+p.img+'" alt=""></td><td><b>Nº '+pad(p.num)+'</b></td><td>'+p.insp+'<small>'+p.fam+'</small></td><td>'+p.line+'</td><td>'+BRL(p.price)+'</td></tr>'; }).join('');
+  var d=document.createElement('div'); d.className='admp'; d.id='admp';
+  d.innerHTML='<div class="admbox"><div class="admhd"><div><div class="eyebrow">Só você vê esta página</div><h2>Retirados da vitrine</h2><p>'+L.length+' perfumes esgotados ou descontinuados. Use pra decidir o que vale comprar de novo.</p></div><a href="./" class="admx">Ver o site</a></div>'+(L.length?'<table class="admt"><thead><tr><th></th><th>Nº</th><th>Inspiração</th><th>Linha</th><th>Preço</th></tr></thead><tbody>'+rows+'</tbody></table>':'<p>Nenhum perfume retirado.</p>')+'</div>';
+  document.body.appendChild(d); document.body.style.overflow='hidden'; }
+
 function stockTag(p){
   if(p.macer) return '<span class="stk ready">Pronto em '+(p.ready||'28/11')+'</span>';
   if(p.sold) return '<span class="stk pre">Esgotado</span>';
@@ -637,6 +658,7 @@ document.getElementById('quizBtn').addEventListener('click',quizOpen);
 document.getElementById('qzx').addEventListener('click',quizClose);
 document.getElementById('qz').addEventListener('click',function(e){ if(e.target.id==='qz') quizClose(); if(e.target.id==='qzagain') quizOpen(); if(e.target.id==='qzall') quizClose(); });
 renderGuia();
+renderAdminPanel();
 $('#bagBtn').addEventListener('click', openCart);
 $('#closeCart').addEventListener('click', closeCart);
 $('#scrim').addEventListener('click', closeCart);
